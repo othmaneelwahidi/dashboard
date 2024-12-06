@@ -14,98 +14,24 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-
-    <style>
-        @keyframes swing {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            10% {
-                transform: rotate(10deg);
-            }
-
-            30% {
-                transform: rotate(0deg);
-            }
-
-            40% {
-                transform: rotate(-10deg);
-            }
-
-            50% {
-                transform: rotate(0deg);
-            }
-
-            60% {
-                transform: rotate(5deg);
-            }
-
-            70% {
-                transform: rotate(0deg);
-            }
-
-            80% {
-                transform: rotate(-5deg);
-            }
-
-            100% {
-                transform: rotate(0deg);
-            }
-        }
-
-        @keyframes sonar {
-            0% {
-                transform: scale(0.9);
-                opacity: 1;
-            }
-
-            100% {
-                transform: scale(2);
-                opacity: 0;
-            }
-        }
-
-        body {
-            font-size: 0.9rem;
-        }
-
-        /*----------------page-wrapper----------------*/
-
-
-        /*----------------toggeled sidebar----------------*/
-
-
-        /*----------------show sidebar button----------------*/
-
-        /*----------------sidebar-content----------------*/
-
-
-        /*--------------------sidebar-brand----------------------*/
-
-
-        /*--------------------sidebar-header----------------------*/
-
-
-
-        /*-----------------------sidebar-search------------------------*/
-
-
-
-        /*----------------------sidebar-menu-------------------------*/
-
-
-
-
-        .page-wrapper {
-            transition: margin-left 0.3s ease;
-            margin-left: 0;
-        }
-
-        .page-wrapper.toggled {
-            margin-left: 250px;
-            /* Match the sidebar width */
-        }
+<style>
+@keyframes sonar {
+  0% {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
 
         a:hover {
             background-color: #444950;
@@ -203,67 +129,36 @@
             overflow-y: auto;
         }
 
-        #sidebar.toggled {
-            left: 0;
-        }
-
-        #show-sidebar {
-            position: fixed;
-            top: 15px;
-            left: 15px;
-            z-index: 1100;
-        }
-
-        #close-sidebar {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-        }
-
-        .sidebar-menu a {
-            display: block;
-            color: #fff;
-            padding: 10px 20px;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .sidebar-menu a:hover {
-            background-color: #495057;
-        }
-
-
-        /*------scroll bar---------------------*/
-
-        .sidebar-footer {
-
-            padding: 10px 0;
-
-
-        }
-
-        /*-----------------------------chiller-theme-------------------------------------------------*/
-        .sidebar-dropdown:hover .sidebar-submenu {
-            display: block;
-        }
-
-        /* Custom Scrollbar Styling */
-
-
-        .sidebar-content::-webkit-scrollbar {
-            display: none;
-            /* Hide scrollbar in WebKit browsers */
-        }
-
-        .sidebar-content {
-            -ms-overflow-style: none;
-            /* IE and Edge */
-            scrollbar-width: none;
-            /* Firefox */
-        }
-    </style>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    .sidebar-toggle {
+        display: block; /* Show toggle button on smaller screens */
+    }
+}
+.badge-sonar {
+  display: inline-block;
+  background: #980303;
+  border-radius: 50%;
+  height: 8px;
+  width: 8px;
+  position: absolute;
+  top: 0;
+}
+.badge-sonar:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 2px solid #980303;
+  opacity: 0;
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  animation: sonar 1.5s infinite;
+}
+a:hover{
+    text-decoration:none;
+}
+</style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
 </head>
 
