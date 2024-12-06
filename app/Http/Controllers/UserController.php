@@ -2,26 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Produit;  
+use App\Models\Produit;
 use Illuminate\Support\Facades\DB;
 
 
 class UserController extends Controller
 {
- 
+
     public function showUsers()
     {
         $users = User::all();
         return view('Panel.Listeutilisateur', compact('users'));
     }
 
- 
+
     public function create()
     {
-        return view('Panel.Utilisateuredit'); 
+        return view('Panel.Utilisateuredit');
     }
 
     // Store the new user
@@ -38,71 +39,53 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'role' => $request->role,
-            'password' => bcrypt($request->password), 
+            'password' => bcrypt($request->password),
         ]);
 
         return redirect()->route('users.create')->with('success', 'User added successfully!');
-        
     }
-    public function dashboard()
+
+
+    public function destroy($id)
     {
-        $totalUsers = User::count();
-        $totalProduits = Produit::count(); // Get the total number of products
-    
-        $quantities = Produit::select(
-            DB::raw('YEAR(created_at) as year'),
-            DB::raw('MONTH(created_at) as month'),
-            DB::raw('SUM(quantité_maximale) as total_quantity')
-        )
-        ->groupBy(DB::raw('YEAR(created_at)'), DB::raw('MONTH(created_at)'))
-        ->orderBy('year', 'asc')
-        ->orderBy('month', 'asc')
-        ->get();
-    
-        return view('dashboard', compact('totalUsers', 'totalProduits', 'quantities'));
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('users.Listeutilisateur')->with('success', 'User deleted successfully');
     }
-    
-    
-  public function destroy($id)
-{
-    $user = User::findOrFail($id);
-    $user->delete();
+    public function update(Request $request, $id)
+    {
 
-    return redirect()->route('users.Listeutilisateur')->with('success', 'User deleted successfully');
-}
-public function update(Request $request, $id)
-{
-   
-    $validated = $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|max:255|unique:users,email,' . $id,
-        'role' => 'required|string|max:255',
-        'password' => 'nullable|string|min:8|confirmed', 
-    ]);
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $id,
+            'role' => 'required|string|max:255',
+            'password' => 'nullable|string|min:8|confirmed',
+        ]);
 
 
-    $user = User::findOrFail($id);
+        $user = User::findOrFail($id);
 
- 
-    $user->name = $validated['name'];
-    $user->email = $validated['email'];
-    $user->role = $validated['role'];
 
-    if ($request->filled('password')) {
-        $user->password = Hash::make($validated['password']);
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+        $user->role = $validated['role'];
+
+        if ($request->filled('password')) {
+            $user->password = Hash::make($validated['password']);
+        }
+
+        $user->save();
+
+
+        return redirect()->route('users.Listeutilisateur')->with('success', 'User updated successfully');
     }
+    public function edit($id)
+    {
 
-    $user->save();
+        $user = User::findOrFail($id);
 
-    
-    return redirect()->route('users.Listeutilisateur')->with('success', 'User updated successfully');
-}
-public function edit($id)
-{
-   
-    $user = User::findOrFail($id);
 
-  
-    return view('Panel.Editutilisateur', compact('user'));
-}
+        return view('Panel.Editutilisateur', compact('user'));
+    }
 }

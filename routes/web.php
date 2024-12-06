@@ -1,16 +1,17 @@
 <?php
 use App\Exports\UsersExport;
+use App\Http\Controllers\DashboardController;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-Route::get('/Linechart', [ProduitController::class, 'showChart']);
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/stock-report', [DashboardController::class, 'generateReport'])->name('stock.report');
+Route::get('/actions', [DashboardController::class, 'showActions'])->name('actions');
 
+Route::get('/Linechart', [ProduitController::class, 'showChart']);
 
 // Define the route for Barchart
 Route::get('/Barchart', function () {
@@ -59,7 +60,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
 });
 Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
-Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
 // Delete User Route
 Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 Route::get('user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');

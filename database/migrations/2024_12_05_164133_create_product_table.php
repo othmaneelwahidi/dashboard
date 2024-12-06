@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('entre_stock', function (Blueprint $table) {
+        Schema::create('product', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('produit_id');
-            $table->integer('quantite');
+            $table->string('name');
+            $table->string('description');
+            $table->string('sku');
+            $table->integer('code_barre');
+            $table->integer('prix');
+            $table->integer('qte_min');
+            $table->integer('qte_max');
             $table->string('fournisseur');
-            $table->date('date_entre');
-            $table->boolean('valide')->default(false);
-            $table->foreign('produit_id')->references('id')->on('produits')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('entre_stock');
+        Schema::dropIfExists('product');
     }
 };
