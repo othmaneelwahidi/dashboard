@@ -186,8 +186,8 @@
             </li>
             <li><a><i class="fas fa-box"></i> Produits</a>
                 <ul>
-                    <li><a href="{{ route('produits.Listeproduit') }}">Listes Produits</a></li>
-                    <li><a href="{{ route('Ajoutproduit') }}">Ajouter Produits</a></li>
+                    <li><a href="{{ route('produits.index') }}">Listes Produits</a></li>
+                    <li><a href="{{ route('produits.create') }}">Ajouter Produits</a></li>
 
                 </ul>
             </li>

@@ -1,24 +1,30 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Product;
 use Illuminate\Support\Facades\DB;
-use App\Models\Produit;  
 use Illuminate\Http\Request;
 
 class ProduitController extends Controller
 {
 
-    public function showProduits()
+    public function index()
     {
        
-        $produits = Produit::all();
+        $produits = Product::all();
         
      
-        return view('Panel.Listeproduit', compact('produits'));
+        return view('product.index', compact('produits'));
     }
+
+    public function create(){
+        return view('product.create');
+    }
+
     public function destroy($id)
     {
-        $produit = Produit::findOrFail($id);
+        $produit = Product::findOrFail($id);
         $produit->delete();
     
         return redirect()->route('produits.Listeproduit')->with('success', '
@@ -29,8 +35,6 @@ class ProduitController extends Controller
     {
         // Validate input
         $validated = $request->validate([
-            'category' => 'required|string|max:255',
-            'sub_category' => 'required|string|max:255|unique:produits,sous_catégorie',
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:1000',
             'sku' => 'required|string|max:255',
@@ -42,16 +46,14 @@ class ProduitController extends Controller
         ]);
 
         // Save data
-        Produit::create([
-            'catégorie' => $validated['category'],
-            'sous_catégorie' => $validated['sub_category'],
-            'nom' => $validated['name'],
+        Product::create([
+            'name' => $validated['name'],
             'description' => $validated['description'],
             'sku' => $validated['sku'],
             'code_barre' => $validated['barcode'],
             'prix' => $validated['prix'],
-            'quantité_minimale' => $validated['min_quantity'],
-            'quantité_maximale' => $validated['max_quantity'],
+            'qte_min' => $validated['min_quantity'],
+            'qte_max' => $validated['max_quantity'],
             'fournisseur' => $validated['supplier'],
         ]);
 
@@ -60,7 +62,7 @@ class ProduitController extends Controller
     }
     public function edit($id)
     {
-        $produit = Produit::findOrFail($id);
+        $produit = Product::findOrFail($id);
         return view('Panel.editProduit', compact('produit'));
     }
     public function update(Request $request, $id)
@@ -80,7 +82,7 @@ class ProduitController extends Controller
         ]);
     
         // Find the product by its ID or fail if not found
-        $produit = Produit::findOrFail($id);
+        $produit = Product::findOrFail($id);
     
         // Update the product with the validated data
         $produit->catégorie = $validated['category'];
@@ -101,20 +103,4 @@ class ProduitController extends Controller
         return redirect()->route('produits.Listeproduit')->with('success', 'Product updated successfully.');
     }
 
-    public function showLineChart()
-    {
-        // Query to calculate total products per month
-        $totalsByMonth = DB::table('products') // Replace 'products' with your table name
-            ->select(DB::raw('MONTHNAME(created_at) as month'), DB::raw('SUM(quantity) as total'))
-            ->groupBy(DB::raw('MONTH(created_at)'))
-            ->orderBy(DB::raw('MONTH(created_at)'))
-            ->get();
-    
-        // Extract months (labels) and totals (data)
-        $labels = $totalsByMonth->pluck('month')->toArray();
-        $data = $totalsByMonth->pluck('total')->toArray();
-    
-        // Pass variables to the view
-        return view('Linechart', compact('labels', 'data')); // Ensure 'Linechart' matches your Blade file name
-    }
 }

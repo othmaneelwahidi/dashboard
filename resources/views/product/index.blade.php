@@ -30,8 +30,6 @@
             <table class="min-w-full bg-white border border-gray-200">
                 <thead class="bg-gray-200 text-gray-600">
                     <tr>
-                        <th class="py-2 px-4 border-b">Catégorie</th>
-                        <th class="py-2 px-4 border-b">Sous-Catégorie</th>
                         <th class="py-2 px-4 border-b">Nom</th>
                         <th class="py-2 px-4 border-b">Description</th>
                         <th class="py-2 px-4 border-b">SKU</th>
@@ -51,8 +49,8 @@
                             <td class="py-2 px-4 border-b">{{ $produit->sku }}</td>
                             <td class="py-2 px-4 border-b">{{ $produit->code_barre }}</td>
                             <td class="py-2 px-4 border-b">{{ $produit->prix }}</td>
-                            <td class="py-2 px-4 border-b">{{ $produit->quantité_minimale }}</td>
-                            <td class="py-2 px-4 border-b">{{ $produit->quantité_maximale }}</td>
+                            <td class="py-2 px-4 border-b">{{ $produit->qte_min }}</td>
+                            <td class="py-2 px-4 border-b">{{ $produit->qte_max }}</td>
                             <td class="py-2 px-4 border-b">{{ $produit->fournisseur }}</td>
                             <td class="py-2 px-4 border-b">
                                 <a href="{{ route('produits.edit', $produit->id) }}">

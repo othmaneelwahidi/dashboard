@@ -23,35 +23,35 @@ class UserController extends Controller
 
 
     public function create()
-{
-    // Fetch all roles to populate the dropdown or selection list
-    $roles = Role::all();
-    return view('user.create', compact('roles'));
-}
+    {
+        // Fetch all roles to populate the dropdown or selection list
+        $roles = Role::all();
+        return view('user.create', compact('roles'));
+    }
 
-// Store the new user
-public function store(Request $request)
-{
-    // Validate the incoming request
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|unique:users,email',
-        'role' => 'exists:role,name', // Validate the role exists in the 'role' table
-        'password' => 'required|string|min:8|confirmed',
-    ]);
+    // Store the new user
+    public function store(Request $request)
+    {
+        // Validate the incoming request
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'role' => 'exists:role,name', // Validate the role exists in the 'role' table
+            'password' => 'required|string|min:8|confirmed',
+        ]);
 
-    $role = Role::where('name', $request->role)->first();
+        $role = Role::where('name', $request->role)->first();
 
-    $user = User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'role_id' => $role->id, 
-        'password' => Hash::make($request->password),
-    ]);
-    $user->save();
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'role_id' => $role->id,
+            'password' => Hash::make($request->password),
+        ]);
+        $user->save();
 
-    return redirect()->route('users.index')->with('success', 'User added successfully!');
-}
+        return redirect()->route('users.index')->with('success', 'User added successfully!');
+    }
 
 
 

@@ -18,7 +18,15 @@ Route::post('/users', [UserController::class, 'store'])->name('users.store');
 Route::get('user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
 Route::put('user/{id}', [UserController::class, 'update'])->name('user.update');
 Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
-    
+
+//produit
+Route::get('/produit', [ProduitController::class, 'index'])->name('produits.index');
+Route::get('/produit/create', [ProduitController::class, 'create'])->name('produits.create');
+Route::post('/produits', [ProduitController::class, 'store'])->name('produits.store');
+Route::get('/produits/{id}/edit', [ProduitController::class, 'edit'])->name('produits.edit');
+Route::put('/produits/{id}', [ProduitController::class, 'update'])->name('produits.update');
+Route::delete('/produit/{id}', [ProduitController::class, 'destroy'])->name('produit.destroy');
+
 
 Route::get('/Linechart', [ProduitController::class, 'showChart']);
 
@@ -38,38 +46,15 @@ Route::get('/Piechart', function () {
 Route::get('/Userprofile', function () {
     return view('Panel.Userprofile'); 
 })->name('Userprofile');
-
-
-Route::get('/Ajoutproduit', function () {
-    return view('Panel.Ajoutproduit'); 
-})->name('Ajoutproduit');
-Route::get('/Listeproduit', function () {
-    return view('Panel.Listeproduit'); 
-})->name('Listeproduit');
-
-
-
 Route::get('/export-users', function () {
     return Excel::download(new UsersExport, 'users.xlsx');
 })->name('export.users');
-
-
-Route::post('/produits', [ProduitController::class, 'store'])->name('produits.store');
-Route::get('/produits/{id}/edit', [ProduitController::class, 'edit'])->name('produits.edit');
-Route::put('/produits/{id}', [ProduitController::class, 'update'])->name('produits.update');
-Route::get('/Listeproduit', [ProduitController::class, 'showProduits'])->name('produits.Listeproduit');
-Route::delete('/produit/{id}', [ProduitController::class, 'destroy'])->name('produit.destroy');
 
 // Profile routes that require authentication
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
 });
-
-
-
-
 
 require __DIR__.'/auth.php';
