@@ -13,100 +13,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-
-<<<<<<< HEAD
-    <style>
-        @keyframes swing {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            10% {
-                transform: rotate(10deg);
-            }
-
-            30% {
-                transform: rotate(0deg);
-            }
-
-            40% {
-                transform: rotate(-10deg);
-            }
-
-            50% {
-                transform: rotate(0deg);
-            }
-
-            60% {
-                transform: rotate(5deg);
-            }
-
-            70% {
-                transform: rotate(0deg);
-            }
-
-            80% {
-                transform: rotate(-5deg);
-            }
-
-            100% {
-                transform: rotate(0deg);
-            }
-        }
-
-        @keyframes sonar {
-            0% {
-                transform: scale(0.9);
-                opacity: 1;
-            }
-
-            100% {
-                transform: scale(2);
-                opacity: 0;
-            }
-        }
-
-        body {
-            font-size: 0.9rem;
-        }
-
-        /*----------------page-wrapper----------------*/
-
-
-        /*----------------toggeled sidebar----------------*/
-
-
-        /*----------------show sidebar button----------------*/
-
-        /*----------------sidebar-content----------------*/
-
-
-        /*--------------------sidebar-brand----------------------*/
-
-
-        /*--------------------sidebar-header----------------------*/
-
-
-
-        /*-----------------------sidebar-search------------------------*/
-
-
-
-        /*----------------------sidebar-menu-------------------------*/
-
-
-
-
-        .page-wrapper {
-            transition: margin-left 0.3s ease;
-            margin-left: 0;
-        }
-
-        .page-wrapper.toggled {
-            margin-left: 250px;
-            /* Match the sidebar width */
-        }
-=======
+<style>
 @keyframes sonar {
   0% {
     transform: scale(0.9);
@@ -138,7 +45,6 @@ a {
     padding: 10px 20px;
     border-radius: 5px;
 }
->>>>>>> f697876d86e97fe127ac2631f3a42f15eda870a7
 
 a:hover {
     background-color: #444950; /* Hover effect for links */
@@ -248,6 +154,9 @@ a:hover {
   width: 100%;
   height: 100%;
   animation: sonar 1.5s infinite;
+}
+a:hover{
+    text-decoration:none;
 }
 </style>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
