@@ -14,24 +14,28 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-<style>
-@keyframes sonar {
-  0% {
-    transform: scale(0.9);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
-}
-body, html {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
-    font-family: Arial, sans-serif;
-    box-sizing: border-box;
-}
+    <style>
+        @keyframes sonar {
+            0% {
+                transform: scale(0.9);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            /* Prevent horizontal scrolling */
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+        }
 
         a:hover {
             background-color: #444950;
@@ -129,36 +133,40 @@ body, html {
             overflow-y: auto;
         }
 
-    .sidebar-toggle {
-        display: block; /* Show toggle button on smaller screens */
-    }
-}
-.badge-sonar {
-  display: inline-block;
-  background: #980303;
-  border-radius: 50%;
-  height: 8px;
-  width: 8px;
-  position: absolute;
-  top: 0;
-}
-.badge-sonar:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  border: 2px solid #980303;
-  opacity: 0;
-  border-radius: 50%;
-  width: 100%;
-  height: 100%;
-  animation: sonar 1.5s infinite;
-}
-a:hover{
-    text-decoration:none;
-}
-</style>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+        .sidebar-toggle {
+            display: block;
+            /* Show toggle button on smaller screens */
+        }
+        }
+
+        .badge-sonar {
+            display: inline-block;
+            background: #980303;
+            border-radius: 50%;
+            height: 8px;
+            width: 8px;
+            position: absolute;
+            top: 0;
+        }
+
+        .badge-sonar:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: 2px solid #980303;
+            opacity: 0;
+            border-radius: 50%;
+            width: 100%;
+            height: 100%;
+            animation: sonar 1.5s infinite;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
 </head>
 
