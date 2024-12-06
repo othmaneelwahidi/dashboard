@@ -98,9 +98,9 @@
             <li class="nav-item">
     <a href="#" class="nav-link position-relative">
         <i class="fa fa-bell" id="bell"></i>
-        <span class="badge badge-pill badge-warning notification position-absolute">
+       
             <span class="badge-sonar"></span>
-        </span>
+   
     </a>
 </li>
 </div>

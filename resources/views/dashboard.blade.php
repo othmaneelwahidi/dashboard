@@ -295,7 +295,7 @@ text-decoration: none;
 }
 /* Button Base Styles */
 #btn-download {
-    margin-top:4%;
+    margin-top:8%;
   cursor: pointer;
   display: block;
   width: 52px;
@@ -315,7 +315,7 @@ text-decoration: none;
 
 /* SVG Styles */
 #btn-download svg {
-  margin: 16px 0 0 16px;
+  margin: 0px 0 0 0px;
   fill: none;
   transform: translate3d(0, 0, 0);
 }
@@ -363,7 +363,16 @@ text-decoration: none;
   }
 }
 .btn-bt{
-    margin-bottom:6%;
+    margin-bottom:12%;
+}
+#download{font-size:30px;}
+#download:hover{
+    background-color:white;
+}
+.Telecharger{
+    font-size:24px;
+    margin-left:10%;
+    margin-top:3%;
 }
      </style>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
@@ -457,12 +466,16 @@ text-decoration: none;
 </div>
 <div class="btn-bt">
             <h2 class="Rapport">Rapport Standard</h2>
+            <h4 class="Telecharger">Télécharger le fichier :</h4>
             <div id="btn-download">
+               
+<a href="{{ route('stock.report') }}" id="download">
   <svg width="22px" height="16px" viewBox="0 0 22 16">
     <path d="M2,10 L6,13 L12.8760559,4.5959317 C14.1180021,3.0779974 16.2457925,2.62289624 18,3.5 L18,3.5 C19.8385982,4.4192991 21,6.29848669 21,8.35410197 L21,10 C21,12.7614237 18.7614237,15 16,15 L1,15" id="check"></path>
     <polyline points="4.5 8.5 8 11 11.5 8.5" class="svg-out"></polyline>
     <path d="M8,1 L8,11" class="svg-out"></path>
   </svg>
+</a >
 </div>
 </div>
 
