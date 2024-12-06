@@ -60,15 +60,22 @@
                                 <a href="{{ route('produits.edit', $produit->id) }}">
                                     <button class="text-blue-600">Edit</button>
                                 </a>
+                              
                                 <br>
                                 <form action="{{route('produit.destroy', $produit->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this product?');">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="text-red-600">Supprimer</button>
+                                    <a href=""><button class="text-green-600">Attributs</button>  </a>
                                 </form>
+                                
+                             
                             </td>
+                            
                         </tr>
+
                     @endforeach
+
                 </tbody>
             </table>
         </div>

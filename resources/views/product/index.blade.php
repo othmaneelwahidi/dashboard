@@ -54,16 +54,21 @@
                             <td class="py-2 px-4 border-b">{{ $produit->fournisseur }}</td>
                             <td class="py-2 px-4 border-b">
                                 <a href="{{ route('produits.edit', $produit->id) }}">
-                                    <button class="text-blue-600">Edit</button>
+                                    <button class="text-blue-600">Détails</button>
                                 </a>
                                 <br>
                                 <form action="{{route('produit.destroy', $produit->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this product?');">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="text-red-600">Supprimer</button>
+
                                 </form>
-                            </td>
+                                <a href="">
+            <button class="text-green-600">Attributs</button>
+        </a>
+                     </td>
                         </tr>
+                      
                     @endforeach
                 </tbody>
             </table>

@@ -191,6 +191,8 @@
 
                 </ul>
             </li>
+            <li>Catégorie<ul><li>Liste Catégories</li>
+        <li>Ajouter Catégorie</li></ul></li>
             <li><a href="#"><i class="fas fa-warehouse"></i> Stocks</a></li>
         </ul>
         <div class="logout">
