@@ -11,15 +11,16 @@ class UsersExport implements FromCollection, WithHeadings, ShouldAutoSize
 {
     public function collection()
     {
-        // Fetch users and map the data to match the desired export format
-        return User::all(['name', 'email', 'role', 'created_at'])
-            ->map(function ($row, $index) {
+        // Fetch users with their roles
+        return User::with('role') 
+            ->get()
+            ->map(function ($user, $index) {
                 return [
-                    $index + 1,
-                    $row->name,
-                    $row->email,
-                    $row->role,
-                    $row->created_at,
+                    $index + 1,                      
+                    $user->name,                     
+                    $user->email,                    
+                    $user->role->name ?? 'N/A',      
+                    $user->created_at->format('Y-m-d H:i:s'), 
                 ];
             });
     }

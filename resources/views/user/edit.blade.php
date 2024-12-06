@@ -103,10 +103,12 @@
             <!-- Role -->
             <div class="mb-4">
                 <label for="role">Role</label>
-                <select name="role" id="role" required>
-                    <option value="Administrateur" {{ old('role', $user->role) == 'Administrateur' ? 'selected' : '' }}>Administrateur</option>
-                    <option value="Visualiseur" {{ old('role', $user->role) == 'Visualiseur' ? 'selected' : '' }}>Visualiseur</option>
-                    <option value="Utilisateur standar" {{ old('role', $user->role) == 'Utilisateur standar' ? 'selected' : '' }}>Utilisateur standar</option>
+                <select id="role_id" name="role_id" required>
+                    @foreach ($roles as $role)
+                        <option value="{{ $role->id }}" {{ $user->role_id == $role->id ? 'selected' : '' }}>
+                            {{ $role->name }}
+                        </option>
+                    @endforeach
                 </select>
                 @error('role') <span>{{ $message }}</span> @enderror
             </div>

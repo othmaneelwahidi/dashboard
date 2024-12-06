@@ -6,10 +6,19 @@ use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-
+//dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/stock-report', [DashboardController::class, 'generateReport'])->name('stock.report');
 Route::get('/actions', [DashboardController::class, 'showActions'])->name('actions');
+
+//user
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+Route::post('/users', [UserController::class, 'store'])->name('users.store');
+Route::get('user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+Route::put('user/{id}', [UserController::class, 'update'])->name('user.update');
+Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+    
 
 Route::get('/Linechart', [ProduitController::class, 'showChart']);
 
@@ -57,13 +66,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::post('/users', [UserController::class, 'store'])->name('users.store');
 });
-Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
-// Delete User Route
-Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
-Route::get('user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
-Route::put('user/{id}', [UserController::class, 'update'])->name('user.update');
+
 
 
 

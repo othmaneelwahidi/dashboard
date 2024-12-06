@@ -73,11 +73,14 @@
             <!-- Role -->
             <div class="mb-4">
                 <label for="role" class="block text-gray-700">Role</label>
-                <select name="role" id="role" class="w-full px-3 py-2 border rounded" required>
-                    <option value="Administrateur" {{ old('role') == 'Administrateur' ? 'selected' : '' }}>Administrateur</option>
-                    <option value="Visualiseur" {{ old('role') == 'Visualiseur' ? 'selected' : '' }}>Visualiseur</option>
-                    <option value="Utilisateur standar" {{ old('role') == 'Utilisateur standar' ? 'selected' : '' }}>Utilisateur standar</option>
-                </select>
+                <select id="role" class="block mt-1 w-full" name="role" required>
+                    <option value="" selected disabled>Choisir votre rôle</option>
+                    @foreach ($roles as $role)
+                        <option value="{{ $role->name }}" {{ old('role') == $role->name ? 'selected' : '' }}>
+                            {{ $role->name }}
+                        </option>
+                    @endforeach
+                </select> 
             </div>
 
             <!-- Password -->

@@ -417,7 +417,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                @if (auth()->user()->role->name == 'administrateur')
+                @if (auth()->user()->role->name == 'Administrateur')
                     <a href="{{ route('actions') }}">See More</a>
                 @endif
             </div>
