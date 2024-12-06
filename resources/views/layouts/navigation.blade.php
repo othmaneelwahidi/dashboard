@@ -3,6 +3,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -106,48 +107,53 @@
             /* Match the sidebar width */
         }
 
-a:hover {
-    background-color: #444950; /* Hover effect for links */
-}
+        a:hover {
+            background-color: #444950;
+            /* Hover effect for links */
+        }
 
-/* Sidebar styles */
-.sidebar {
-    width: 250px; /* Fixed sidebar width */
-    min-width: 250px;
-    height: 100vh;
-    position: fixed;
-    left: 0;
-    top: 0;
-    background-color: #2d333a; /* Dark background for sidebar */
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    overflow-y: auto; /* Vertical scroll for long content */
-    z-index: 1000;
-    transition: transform 0.3s ease-in-out; /* Smooth toggle effect */
-}
+        /* Sidebar styles */
+        .sidebar {
+            width: 250px;
+            /* Fixed sidebar width */
+            min-width: 250px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background-color: #2d333a;
+            /* Dark background for sidebar */
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            overflow-y: auto;
+            /* Vertical scroll for long content */
+            z-index: 1000;
+            transition: transform 0.3s ease-in-out;
+            /* Smooth toggle effect */
+        }
 
-.sidebar h1 {
-    font-size: 20px;
-    margin-bottom: 20px;
-    color: #ffffff;
-    text-transform: uppercase;
-}
+        .sidebar h1 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
 
         /*--------------------------side-footer------------------------------*/
 
-.sidebar ul li a {
-    color: #ffffff;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-}
+        .sidebar ul li a {
+            color: #ffffff;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
 
-.sidebar ul li a i {
-    margin-right: 10px;
-    font-size: 18px;
-}
+        .sidebar ul li a i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
 
         .badge-sonar {
             display: inline-block;
@@ -262,21 +268,26 @@ a:hover {
 </head>
 
 <body>
-  <!-- Sidebar -->
-  <div class="sidebar">
+    <!-- Sidebar -->
+    <div class="sidebar">
         <h1>Dashboard</h1>
         <ul>
-            <li><a href="#"><i class="fas fa-tachometer-alt"></i> General</a></li>
-            <li class="collapsible">
-                <a href="#"><i class="fas fa-chart-line"></i> Charts</a>
+            <li><a href="{{ route('dashboard') }}"><i class="fas fa-tachometer-alt"></i> General</a></li>
+
+            <li><a><i class="fas fa-user"></i> Utilisateurs</a>
                 <ul>
-                    <li><a href="#">Pie chart</a></li>
-                    <li><a href="#">Line chart</a></li>
-                    <li><a href="#">Bar chart</a></li>
+                    <li><a href="{{ route('users.index') }}">Listes Utilisateurs</a></li>
+                    <li><a href="{{ route('users.create') }}">Ajouter Utilisateurs</a></li>
+
                 </ul>
             </li>
-            <li><a href="#"><i class="fas fa-user"></i> Utilisateurs</a></li>
-            <li><a href="#"><i class="fas fa-box"></i> Produits</a></li>
+            <li><a><i class="fas fa-box"></i> Produits</a>
+                <ul>
+                    <li><a href="{{ route('produits.Listeproduit') }}">Listes Produits</a></li>
+                    <li><a href="{{ route('Ajoutproduit') }}">Ajouter Produits</a></li>
+
+                </ul>
+            </li>
             <li><a href="#"><i class="fas fa-warehouse"></i> Stocks</a></li>
         </ul>
         <div class="logout">
@@ -295,9 +306,10 @@ a:hover {
             });
         });
     </script>
-  <main>
-    @yield('content')
-  </main>  </div>
+    <main>
+        @yield('content')
+    </main>
+    </div>
 </body>
 
 </html>
