@@ -63,53 +63,73 @@ class ProduitController extends Controller
     }
     public function edit($id)
     {
-        // Fetch the product by ID
         $product = Product::findOrFail($id);
 
-        // Fetch the attributes associated with this product
-        $attributes = Attribute::where('product_id', $id)->get();
+        $attribute = Attribute::where('product_id', $id)->get();
 
-        // Pass product and attributes to the edit view
-        return view('product.edit', compact('product', 'attributes'));
+        return view('product.edit', compact('product', 'attribute'));
     }
 
     public function update(Request $request, $id)
     {
-        // Validate incoming request
+        // Validate request data
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'price' => 'required|numeric|min:0',
-            'description' => 'nullable|string',
-            'attributes' => 'array',
-            'attributes.*.poids' => 'required|integer',
-            'attributes.*.dimension' => 'required|integer',
-            'attributes.*.couleur' => 'required|string|max:255',
-            'attributes.*.marque' => 'required|string|max:255',
-            'attributes.*.autre' => 'nullable|string|max:255',
+            'description' => 'required|string|max:255',
+            'sku' => 'required|string|max:255',
+            'code_barre' => 'required|integer',
+            'prix' => 'required|numeric|min:0',
+            'qte_min' => 'required|integer|min:0',
+            'qte_max' => 'required|integer|min:0',
+            'fournisseur' => 'required|string|max:255',
+
+            // Attributes validation
+            'attribute' => 'array',
+            'attribute.*.id' => 'nullable|exists:attribute,id', // Ensure attribute ID exists
+            'attribute.*.poids' => 'required|numeric|min:0',
+            'attribute.*.dimension' => 'required|numeric|min:0',
+            'attribute.*.couleur' => 'required|string|max:255',
+            'attribute.*.marque' => 'required|string|max:255',
+            'attribute.*.autre' => 'nullable|string|max:255',
         ]);
 
         // Update the product
         $product = Product::findOrFail($id);
         $product->update([
             'name' => $validated['name'],
-            'price' => $validated['price'],
             'description' => $validated['description'],
+            'sku' => $validated['sku'],
+            'code_barre' => $validated['code_barre'],
+            'prix' => $validated['prix'],
+            'qte_min' => $validated['qte_min'],
+            'qte_max' => $validated['qte_max'],
+            'fournisseur' => $validated['fournisseur'],
         ]);
 
-        // Update attributes
-        if (!empty($validated['attributes'])) {
-            foreach ($validated['attributes'] as $attributeId => $attributeData) {
-                $attribute = Attribute::find($attributeId);
-                if ($attribute && $attribute->product_id == $id) {
-                    $attribute->update($attributeData);
+        // Handle attributes
+        if (!empty($validated['attribute'])) {
+            foreach ($validated['attribute'] as $attributeData) {
+                if (!empty($attributeData['id'])) {
+                    $attribute = Attribute::find($attributeData['id']);
+                    if ($attribute && $attribute->product_id == $product->id) {
+                        $attribute->update([
+                            'poids' => $attributeData['poids'],
+                            'dimension' => $attributeData['dimension'],
+                            'couleur' => $attributeData['couleur'],
+                            'marque' => $attributeData['marque'],
+                            'autre' => $attributeData['autre'],
+                        ]);
+                    }
                 }
             }
         }
 
+        // Return response
         return redirect()
             ->route('produits.index')
             ->with('success', 'Product and attributes updated successfully!');
     }
+
 
     public function indexAttribute($id)
     {

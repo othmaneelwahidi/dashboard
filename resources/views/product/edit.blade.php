@@ -1,15 +1,16 @@
 <x-app-layout>
     <style>
         .container {
+            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            margin: 0;
-            margin-top: -45%;
+            margin: 0 auto;
+            padding: 2rem;
+            max-width: 800px;
         }
 
         .submit-btn {
-            margin-left: 45%;
             padding: 12px 24px;
             background-color: green;
             color: white;
@@ -20,7 +21,7 @@
         }
 
         .submit-btn:hover {
-            background-color: green;
+            background-color: darkgreen;
             transform: scale(1.05);
         }
 
@@ -28,121 +29,129 @@
             outline: none;
             box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
         }
-    </style>
-    <div class="container mx-auto p-4">
-        <h2 class="text-xl font-bold mb-4">Edit Product</h2>
 
-        @if(session('success'))
-            <div class="alert alert-success">
+        .alert {
+            margin-bottom: 1rem;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            color: white;
+            background-color: green;
+        }
+    </style>
+    <div class="container mx-auto">
+        <h2 class="text-2xl font-bold mb-4">Edit Product</h2>
+
+        @if (session('success'))
+            <div class="alert">
                 {{ session('success') }}
             </div>
         @endif
 
-        <form method="POST" action="{{ route('produits.update', $produit->id) }}">
+        <form method="POST" action="{{ route('produits.update', $product->id) }}">
             @csrf
             @method('PUT')
-            <!-- Name -->
+
+            <!-- Product Name -->
             <div class="mb-4">
-                <label for="name" class="block text-gray-700">Name</label>
-                <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    class="w-full px-3 py-2 border rounded"
-                    required
-                    value="{{ old('nom', $produit->nom) }}"
-                />
+                <label for="name" class="block text-gray-700 font-bold">Name</label>
+                <input type="text" name="name" id="name" class="w-full px-3 py-2 border rounded" required
+                    value="{{ old('name', $product->name) }}" />
             </div>
 
-            <!-- Description -->
+            <!-- Product Description -->
             <div class="mb-4">
-                <label for="description" class="block text-gray-700">Description</label>
-                <textarea
-                    name="description"
-                    id="description"
-                    class="w-full px-3 py-2 border rounded"
-                    required
-                >{{ old('description', $produit->description) }}</textarea>
+                <label for="description" class="block text-gray-700 font-bold">Description</label>
+                <textarea name="description" id="description" class="w-full px-3 py-2 border rounded" required>{{ old('description', $product->description) }}</textarea>
             </div>
 
             <!-- SKU -->
             <div class="mb-4">
-                <label for="sku" class="block text-gray-700">SKU</label>
-                <input
-                    type="text"
-                    name="sku"
-                    id="sku"
-                    class="w-full px-3 py-2 border rounded"
-                    required
-                    value="{{ old('sku', $produit->sku) }}"
-                />
+                <label for="sku" class="block text-gray-700 font-bold">SKU</label>
+                <input type="text" name="sku" id="sku" class="w-full px-3 py-2 border rounded" required
+                    value="{{ old('sku', $product->sku) }}" />
             </div>
 
             <!-- Barcode -->
             <div class="mb-4">
-                <label for="barcode" class="block text-gray-700">Barcode</label>
-                <input
-                    type="text"
-                    name="barcode"
-                    id="barcode"
-                    class="w-full px-3 py-2 border rounded"
-                    required
-                    value="{{ old('code_barre', $produit->code_barre) }}"
-                />
+                <label for="code_barre" class="block text-gray-700 font-bold">Barcode</label>
+                <input type="text" name="code_barre" id="code_barre" class="w-full px-3 py-2 border rounded" required
+                    value="{{ old('code_barre', $product->code_barre) }}" />
             </div>
 
             <!-- Price -->
             <div class="mb-4">
-                <label for="prix" class="block text-gray-700">Price</label>
-                <input
-                    type="number"
-                    step="0.01"
-                    name="prix"
-                    id="prix"
-                    class="w-full px-3 py-2 border rounded"
-                    required
-                    value="{{ old('prix', $produit->prix) }}"
-                />
+                <label for="prix" class="block text-gray-700 font-bold">Price</label>
+                <input type="number" step="0.01" name="prix" id="prix" class="w-full px-3 py-2 border rounded" required
+                    value="{{ old('prix', $product->prix) }}" />
             </div>
 
-            <!-- Min Quantity -->
+            <!-- Minimum Quantity -->
             <div class="mb-4">
-                <label for="min_quantity" class="block text-gray-700">Minimum Quantity</label>
-                <input
-                    type="number"
-                    name="min_quantity"
-                    id="min_quantity"
-                    class="w-full px-3 py-2 border rounded"
-                    required
-                    value="{{ old('quantité_minimale', $produit->quantité_minimale) }}"
-                />
+                <label for="qte_min" class="block text-gray-700 font-bold">Minimum Quantity</label>
+                <input type="number" name="qte_min" id="qte_min" class="w-full px-3 py-2 border rounded" required
+                    value="{{ old('qte_min', $product->qte_min) }}" />
             </div>
 
-            <!-- Max Quantity -->
+            <!-- Maximum Quantity -->
             <div class="mb-4">
-                <label for="max_quantity" class="block text-gray-700">Maximum Quantity</label>
-                <input
-                    type="number"
-                    name="max_quantity"
-                    id="max_quantity"
-                    class="w-full px-3 py-2 border rounded"
-                    required
-                    value="{{ old('quantité_maximale', $produit->quantité_maximale) }}"
-                />
+                <label for="qte_max" class="block text-gray-700 font-bold">Maximum Quantity</label>
+                <input type="number" name="qte_max" id="qte_max" class="w-full px-3 py-2 border rounded" required
+                    value="{{ old('qte_max', $product->qte_max) }}" />
             </div>
 
             <!-- Supplier -->
             <div class="mb-4">
-                <label for="supplier" class="block text-gray-700">Supplier</label>
-                <input
-                    type="text"
-                    name="supplier"
-                    id="supplier"
-                    class="w-full px-3 py-2 border rounded"
-                    required
-                    value="{{ old('fournisseur', $produit->fournisseur) }}"
-                />
+                <label for="fournisseur" class="block text-gray-700 font-bold">Supplier</label>
+                <input type="text" name="fournisseur" id="fournisseur" class="w-full px-3 py-2 border rounded" required
+                    value="{{ old('fournisseur', $product->fournisseur) }}" />
             </div>
+
+            <!-- Attributes Section -->
+            <h2 class="text-xl font-semibold mb-4">Attributes</h2>
+            @foreach ($attribute as $attr)
+                <div class="border p-4 mb-4 rounded">
+                    <input type="hidden" name="attribute[{{ $attr->id }}][id]" value="{{ $attr->id }}">
+
+                    <!-- Weight -->
+                    <div class="mb-2">
+                        <label class="block text-gray-700 font-bold">Weight</label>
+                        <input type="number" step="0.01" name="attribute[{{ $attr->id }}][poids]"
+                            value="{{ old('attribute.' . $attr->id . '.poids', $attr->poids) }}" 
+                            class="w-full px-3 py-2 border rounded" required>
+                    </div>
+
+                    <!-- Dimension -->
+                    <div class="mb-2">
+                        <label class="block text-gray-700 font-bold">Dimension</label>
+                        <input type="number" step="0.01" name="attribute[{{ $attr->id }}][dimension]"
+                            value="{{ old('attribute.' . $attr->id . '.dimension', $attr->dimension) }}" 
+                            class="w-full px-3 py-2 border rounded" required>
+                    </div>
+
+                    <!-- Color -->
+                    <div class="mb-2">
+                        <label class="block text-gray-700 font-bold">Color</label>
+                        <input type="text" name="attribute[{{ $attr->id }}][couleur]"
+                            value="{{ old('attribute.' . $attr->id . '.couleur', $attr->couleur) }}" 
+                            class="w-full px-3 py-2 border rounded" required>
+                    </div>
+
+                    <!-- Brand -->
+                    <div class="mb-2">
+                        <label class="block text-gray-700 font-bold">Brand</label>
+                        <input type="text" name="attribute[{{ $attr->id }}][marque]"
+                            value="{{ old('attribute.' . $attr->id . '.marque', $attr->marque) }}" 
+                            class="w-full px-3 py-2 border rounded" required>
+                    </div>
+
+                    <!-- Other -->
+                    <div class="mb-2">
+                        <label class="block text-gray-700 font-bold">Other</label>
+                        <textarea name="attribute[{{ $attr->id }}][autre]" 
+                            class="w-full px-3 py-2 border rounded">{{ old('attribute.' . $attr->id . '.autre', $attr->autre) }}</textarea>
+                    </div>
+                </div>
+            @endforeach
 
             <!-- Submit Button -->
             <div class="mt-4">
