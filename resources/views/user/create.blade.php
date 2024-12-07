@@ -30,10 +30,10 @@
             outline: none; 
             box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5); 
         }
-
+#form{margin-left:10%;}
     </style>
-    <div class="container mx-auto p-4">
-        <h2 class="text-xl font-bold mb-4">Add New User</h2>
+    <div class="container mx-auto p-4" >
+        <h2 class="text-xl font-bold mb-4" id="form">Add New User</h2>
 
         @if(session('success'))
             <div class="alert alert-success">
@@ -41,7 +41,7 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('users.store') }}">
+        <form method="POST" action="{{ route('users.store') }}" id="form">
             @csrf
 
             <!-- Name -->

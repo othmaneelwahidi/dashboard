@@ -1,22 +1,46 @@
 <x-app-layout>
     <style>
-        /* Centering the container */
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            /* Full viewport height */
-            margin: 0;
-            /* Remove any margin */
-            margin-top: -55%;
-        }
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        margin-top: -55%;
+    }
 
-        .table-container {
-            overflow-x: auto;
-            white-space: nowrap;
-        }
+    .table-container {
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    /* Adjusting table and cell size */
+    table {
+        width: 70%; /* Smaller table width */
+        margin: 0 auto; /* Center the table */
+        border-collapse: collapse; /* Remove gaps between cells */
+        font-size: 12px; /* Reduce font size */
+    }
+
+    th, td {
+        padding: 4px 8px; /* Smaller padding for compact cells */
+        text-align: left;
+        border: 1px solid #ccc; /* Add border for clarity */
+    }
+
+    th {
+        background-color: #f2f2f2; /* Light header background */
+        font-weight: bold;
+    }
+
+    tr {
+        height: auto; /* Adjust height based on content */
+    }
+
+    #form {
+        margin-left: 10%;
+    }
     </style>
 
     <div class="container mx-auto p-4">
@@ -35,7 +59,7 @@
 
         <h2 class="text-xl font-bold mb-4">Liste des Produits</h2>
 
-        <div class="table-container">
+        <div class="table-container" id="form">
             <table class="min-w-full bg-white border border-gray-200">
                 <thead class="bg-gray-200 text-gray-600">
                     <tr>
