@@ -13,8 +13,12 @@
         {{-- Display Product Details --}}
         <div class="bg-white shadow-md rounded p-4 mb-6">
             <h2 class="text-xl font-semibold">{{ $product->name }}</h2>
-            <p class="text-gray-700">Price: ${{ number_format($product->price, 2) }}</p>
+            <p class="text-gray-700">Price: {{ number_format($product->prix, 00) }} DH</p>
+            <p class="text-gray-700">SKU: {{ $product->sku }}</p>
+            <p class="text-gray-700">Code barre: {{ $product->code_barre }}</p>
             <p class="text-gray-700">Description: {{ $product->description }}</p>
+            <p class="text-gray-700">Quantite minimale: {{ $product->qte_min }}</p>
+            <p class="text-gray-700">Quantite maximale: {{ $product->qte_max }}</p>
         </div>
 
         {{-- Display Product Attributes --}}
