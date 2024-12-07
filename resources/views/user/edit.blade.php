@@ -69,10 +69,13 @@
             background-color: #f8d7da;
             color: #721c24;
         }
+        #form{
+            margin-left:10%;
+        }
     </style>
 
-    <div class="container mx-auto p-4">
-        <h2 class="text-xl font-bold mb-4">Edit User</h2>
+    <div class="container mx-auto p-4" >
+        <h2 class="text-xl font-bold mb-4" id="form">Edit User</h2>
 
         <!-- Success message -->
         @if(session('success'))
@@ -82,7 +85,7 @@
         @endif
 
         <!-- Form to update user -->
-        <form action="{{ route('user.update', $user->id) }}" method="POST">
+        <form action="{{ route('user.update', $user->id) }}" method="POST" id="form">
             @csrf
             @method('PUT')
 

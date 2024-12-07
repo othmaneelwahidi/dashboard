@@ -1,6 +1,12 @@
 @extends('layouts.navigation')
 @extends('layouts.navbar')
 @section('content')
+<style>
+    .Liste{
+        margin-left:20%;
+    }
+</style>
+<div class="Liste">
     <div class="container mx-auto p-6">
         <h1 class="text-2xl font-bold mb-4">Product Details</h1>
 
@@ -43,5 +49,5 @@
         {{-- Back Button --}}
         <a href="{{ route('produits.index') }}" class="text-blue-600 mt-4 inline-block">← Back to Products</a>
         <a href="{{ route('produits.edit', $product->id) }}" class="text-green-600 mt-4 inline-block">Modifier Product</a>
-    </div>
+    </div></div>
 @endsection
