@@ -158,9 +158,9 @@
 }
 table {
   border-collapse: collapse;
-  width: 60%; /* Adjust width for smaller size */
+  width: 40%; /* Adjust width for smaller size */
   margin: 0 auto; /* Center the table */
-  margin-left:-10%;
+  margin-left:10%;
 }
 
 table, td, th {
@@ -210,7 +210,7 @@ aside.left-aside {
 
 ul {
   gap: 10px;
-  padding:10px;
+  padding:18px;
   list-style: none;
 } 
 
