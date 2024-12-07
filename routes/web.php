@@ -24,11 +24,14 @@ Route::get('/produit', [ProduitController::class, 'index'])->name('produits.inde
 Route::get('/produit/create', [ProduitController::class, 'create'])->name('produits.create');
 Route::post('/produits', [ProduitController::class, 'store'])->name('produits.store');
 Route::get('/produits/{id}/edit', [ProduitController::class, 'edit'])->name('produits.edit');
+Route::get('/produits/{id}/show', [ProduitController::class, 'show'])->name('produits.show');
 Route::put('/produits/{id}', [ProduitController::class, 'update'])->name('produits.update');
 Route::delete('/produit/{id}', [ProduitController::class, 'destroy'])->name('produit.destroy');
+//attribute
+Route::get('/product/{id}/attribute', [ProduitController::class, 'indexAttribute'])->name('index.attribute');
+Route::post('/product/{id}/attribute', [ProduitController::class, 'storeAttribute'])->name('store.attribute');
 
 
-Route::get('/Linechart', [ProduitController::class, 'showChart']);
 
 // Define the route for Barchart
 Route::get('/Barchart', function () {

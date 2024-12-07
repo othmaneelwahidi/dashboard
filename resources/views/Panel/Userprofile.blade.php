@@ -76,7 +76,7 @@
                             <div class="statue"> 
                                 <h6 class="mb-1">Statue  <span class="badge-sonarr"></span></h6>
                             </div>  
-                            <h2 class="mb-0">{{ Auth::user()->role }}</h2>
+                            <h2 class="mb-0">{{ Auth::user()->role->name }}</h2>
                         </div>
                     </div>
                 </div>

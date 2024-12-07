@@ -6,8 +6,10 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh; /* Full viewport height */
-            margin: 0; /* Remove any margin */
+            height: 100vh;
+            /* Full viewport height */
+            margin: 0;
+            /* Remove any margin */
             margin-top: -55%;
         }
 
@@ -17,12 +19,19 @@
         }
     </style>
 
-<div class="container mx-auto p-4">
+    <div class="container mx-auto p-4">
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
             </div>
         @endif
+
 
         <h2 class="text-xl font-bold mb-4">Liste des Produits</h2>
 
@@ -53,22 +62,22 @@
                             <td class="py-2 px-4 border-b">{{ $produit->qte_max }}</td>
                             <td class="py-2 px-4 border-b">{{ $produit->fournisseur }}</td>
                             <td class="py-2 px-4 border-b">
-                                <a href="{{ route('produits.edit', $produit->id) }}">
+                                <a href="{{ route('produits.show', $produit->id) }}">
                                     <button class="text-blue-600">Détails</button>
                                 </a>
                                 <br>
-                                <form action="{{route('produit.destroy', $produit->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                                <form action="{{ route('produit.destroy', $produit->id) }}" method="POST"
+                                    onsubmit="return confirm('Are you sure you want to delete this product?');">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="text-red-600">Supprimer</button>
 
                                 </form>
-                                <a href="">
-            <button class="text-green-600">Attributs</button>
-        </a>
-                     </td>
+                                <a href="{{ route('index.attribute', $produit->id) }}">
+                                    <button class="text-green-600">Attributs</button>
+                                </a>
+                            </td>
                         </tr>
-                      
                     @endforeach
                 </tbody>
             </table>

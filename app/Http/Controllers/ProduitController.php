@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attribute;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -11,14 +12,15 @@ class ProduitController extends Controller
 
     public function index()
     {
-       
+
         $produits = Product::all();
-        
-     
+
+
         return view('product.index', compact('produits'));
     }
 
-    public function create(){
+    public function create()
+    {
         return view('product.create');
     }
 
@@ -26,11 +28,10 @@ class ProduitController extends Controller
     {
         $produit = Product::findOrFail($id);
         $produit->delete();
-    
-        return redirect()->route('produits.Listeproduit')->with('success', '
-        Produit deleted successfully');
+
+        return redirect()->route('produits.index')->with('success', 'Produit deleted successfully');
     }
-    
+
     public function store(Request $request)
     {
         // Validate input
@@ -58,49 +59,105 @@ class ProduitController extends Controller
         ]);
 
         // Redirect with success message
-        return redirect()->route('dashboard')->with('success', 'Produit créé avec succès');
+        return redirect()->route('produits.index')->with('success', 'Produit créé avec succès');
     }
     public function edit($id)
     {
-        $produit = Product::findOrFail($id);
-        return view('Panel.editProduit', compact('produit'));
-    }
-    public function update(Request $request, $id)
-    {
-        // Validate the incoming request
-        $validated = $request->validate([
-            'category' => 'required|string|max:255',
-            'sub_category' => 'required|string|max:255|unique:produits,sous_catégorie,' . $id,
-            'name' => 'required|string|max:255',
-            'description' => 'required|string|max:1000',
-            'sku' => 'required|string|max:255',
-            'barcode' => 'required|string|max:255',
-            'prix' => 'required|numeric',
-            'min_quantity' => 'required|numeric',
-            'max_quantity' => 'required|numeric',
-            'supplier' => 'required|string|max:255',
-        ]);
-    
-        // Find the product by its ID or fail if not found
-        $produit = Product::findOrFail($id);
-    
-        // Update the product with the validated data
-        $produit->catégorie = $validated['category'];
-        $produit->sous_catégorie = $validated['sub_category'];
-        $produit->nom = $validated['name'];
-        $produit->description = $validated['description'];
-        $produit->sku = $validated['sku'];
-        $produit->code_barre = $validated['barcode'];
-        $produit->prix = $validated['prix'];
-        $produit->quantité_minimale = $validated['min_quantity'];
-        $produit->quantité_maximale = $validated['max_quantity'];
-        $produit->fournisseur = $validated['supplier'];
-    
-        // Save the updated product to the database
-        $produit->save();
-    
-        // Redirect back to the product list with a success message
-        return redirect()->route('produits.Listeproduit')->with('success', 'Product updated successfully.');
+        // Fetch the product by ID
+        $product = Product::findOrFail($id);
+
+        // Fetch the attributes associated with this product
+        $attributes = Attribute::where('product_id', $id)->get();
+
+        // Pass product and attributes to the edit view
+        return view('product.edit', compact('product', 'attributes'));
     }
 
+    public function update(Request $request, $id)
+    {
+        // Validate incoming request
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric|min:0',
+            'description' => 'nullable|string',
+            'attributes' => 'array',
+            'attributes.*.poids' => 'required|integer',
+            'attributes.*.dimension' => 'required|integer',
+            'attributes.*.couleur' => 'required|string|max:255',
+            'attributes.*.marque' => 'required|string|max:255',
+            'attributes.*.autre' => 'nullable|string|max:255',
+        ]);
+
+        // Update the product
+        $product = Product::findOrFail($id);
+        $product->update([
+            'name' => $validated['name'],
+            'price' => $validated['price'],
+            'description' => $validated['description'],
+        ]);
+
+        // Update attributes
+        if (!empty($validated['attributes'])) {
+            foreach ($validated['attributes'] as $attributeId => $attributeData) {
+                $attribute = Attribute::find($attributeId);
+                if ($attribute && $attribute->product_id == $id) {
+                    $attribute->update($attributeData);
+                }
+            }
+        }
+
+        return redirect()
+            ->route('produits.index')
+            ->with('success', 'Product and attributes updated successfully!');
+    }
+
+    public function indexAttribute($id)
+    {
+        $product = Product::findOrFail($id);
+        return view('product.attribute', compact('product'));
+    }
+
+    public function storeAttribute(Request $request, $id)
+    {
+        // Validate incoming request data
+        $validated = $request->validate([
+            'poids' => 'required|integer',
+            'dimension' => 'required|integer',
+            'couleur' => 'required|string|max:255',
+            'marque' => 'required|string|max:255',
+            'autre' => 'nullable|string|max:255', // Allow 'autre' to be null
+        ]);
+
+        // Check if the product already has an attribute
+        $existingAttribute = Attribute::where('product_id', $id)->first();
+
+        if ($existingAttribute) {
+            // Redirect back with an error message
+            return redirect()
+                ->route('produits.index')
+                ->with('error', 'This product already has an attribute.');
+        }
+
+        // Save the attribute to the database
+        Attribute::create([
+            'product_id' => $id, // Use $id directly since it's the route parameter
+            'poids' => $validated['poids'],
+            'dimension' => $validated['dimension'],
+            'couleur' => $validated['couleur'],
+            'marque' => $validated['marque'],
+            'autre' => $validated['autre'],
+        ]);
+
+        // Redirect back with success message
+        return redirect()
+            ->route('produits.index')
+            ->with('success', 'Attribute added successfully!');
+    }
+
+    public function show($id)
+    {
+        $product = Product::findOrFail($id);
+        $attributes = Attribute::where('product_id', $id)->get();
+        return view('product.show', compact('product', 'attributes'));
+    }
 }
