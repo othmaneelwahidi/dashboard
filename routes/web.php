@@ -45,6 +45,7 @@ Route::resource('stocks', StockController::class);
 Route::get('/custom-reports', [CustomReportController::class, 'index'])->name('reports.index');
 Route::post('/custom-reports/export', [CustomReportController::class, 'export'])->name('reports.export');
 
+
 // Define the route for Barchart
 Route::get('/Barchart', function () {
     return view('Panel.Barchart'); 
