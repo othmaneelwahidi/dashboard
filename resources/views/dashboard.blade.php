@@ -35,7 +35,7 @@
         margin-left: 5%;
     }
     table {
-        width: 100%;
+        width: 80%;
         margin-left: 0;
         font-size: 12px;
     }
@@ -356,7 +356,7 @@
             }
 
             div.content {
-                width: 100%;
+                width: 80%;
             }
 
             body>header>div.image-logo {
@@ -516,7 +516,7 @@
             }
 
             .btn-bt {
-                margin-bottom: 12%;
+                margin-bottom: 19%;
             }
 
             #download {
@@ -540,7 +540,13 @@
     margin: 20px auto;
     text-align: center;
 }
-
+.table {
+    margin-left: 10%;
+    width: 85%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+}
 .btn-slide, .btn-slide2 {
     position: relative;
     display: inline-block;
@@ -556,26 +562,26 @@
 }
 
 .btn-slide2 {
-    border: 2px solid #efa666;
+    border: 2px solid #016306;
 }
 
 .btn-slide:hover {
-    background-color: #0099cc;
+    background-color:#016306;
 }
 
 .btn-slide2:hover {
-    background-color: #efa666;
+    background-color:#016306;
 }
 
 .btn-slide:hover span.circle, .btn-slide2:hover span.circle2 {
     left: 100%;
     margin-left: -45px;
     background-color: #fdfdfd;
-    color: #0099cc;
+    color: #016306;
 }
 
 .btn-slide2:hover span.circle2 {
-    color: #efa666;
+    color: #016306;
 }
 
 .btn-slide:hover span.title, .btn-slide2:hover span.title2 {
@@ -590,7 +596,7 @@
 
 .btn-slide span.circle, .btn-slide2 span.circle2 {
     display: block;
-    background-color: #0099cc;
+    background-color: #016306;
     color: #fff;
     position: absolute;
     float: left;
@@ -605,7 +611,7 @@
 }
 
 .btn-slide2 span.circle2 {
-    background-color: #efa666;
+    background-color: #016306;
 }
 
 .btn-slide span.title,
@@ -617,13 +623,13 @@
     margin: 0 auto;
     font-size: 16px;
     font-weight: bold;
-    color: #30abd5;
+    color:#016306;
     transition: .5s;
 }
 
 .btn-slide2 span.title2,
   .btn-slide2 span.title-hover2 {
-    color: #efa666;
+    color: #016306;
     left: 80px;
   }
 
@@ -634,6 +640,11 @@
 
 .btn-slide span.title-hover, .btn-slide2 span.title-hover2 {
     color: #fff;
+}
+.btn-bte{
+    margin-bottom:5%;
+    margin-top:8%;
+    margin-left:30%;
 }
 </style>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
@@ -730,11 +741,12 @@
                     </div>
                 </div>
             </div>
+            <div class="btn-bt" >
             <div class="btn-bt">
                 <h2 class="Rapport">Rapport Standard</h2>
-                <h4 class="Telecharger">Télécharger le fichier :</h4>
+                <h4 class="Telecharger">Télécharger le fichier :</h4>  </div></div>
                 <div id="btn-download">
-
+              
                 <div id="wrap">    
                 <a href="{{ route('stock.report') }}" id="download"  class="btn-slide2">
   <span class="circle2"><i class="fa fa-download"></i></span>
@@ -743,21 +755,21 @@
 </a>
 </div>
                   
-                </div>
+             
                 </div>
             </div>
-            <div class="btn-bt">
+            <div class="btn-bte">
                 <h2 class="Rapport">Rapport Personnalisés:</h2>
                 <h4 class="Telecharger">Personnaliser votre rapport:</h4>
                 <div id="btn-download">
-                <div id="wrap">    
-                <a href="{{ route('reports.index') }}" id="download" class="btn-slide2">
-  <span class="circle2"><i class="fa fa-download"></i></span>
-  <span class="title2">Download</span>
-  <span class="title-hover2">Click here</span>
+                 
+                <a href="{{ route('reports.index') }}" >
+
+
+  <span>Click here</span>
 </a>
-</div>
-                  
+
+
                 </div>
             </div>
 

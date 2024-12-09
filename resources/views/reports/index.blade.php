@@ -1,6 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.navigation')
 
 @section('content')
+<style>
+    .container{
+        margin-left:20%;
+        margin-top:5%;
+    }
+</style>
 <div class="container">
     <h1>Créer un rapport personnalisé des mouvements de stock</h1>
     <form method="POST" action="{{ route('reports.export') }}">
