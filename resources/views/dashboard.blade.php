@@ -532,8 +532,108 @@
                 margin-left: 10%;
                 margin-top: 3%;
             }
-.row{
+
+            .row{
     margin-left:10%;
+}}
+#wrap {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.btn-slide, .btn-slide2 {
+    position: relative;
+    display: inline-block;
+    height: 50px;
+    width: 200px;
+    line-height: 50px;
+    padding: 0;
+    border-radius: 50px;
+    background: #fdfdfd;
+    border: 2px solid #0099cc;
+    margin: 10px;
+    transition: .5s;
+}
+
+.btn-slide2 {
+    border: 2px solid #efa666;
+}
+
+.btn-slide:hover {
+    background-color: #0099cc;
+}
+
+.btn-slide2:hover {
+    background-color: #efa666;
+}
+
+.btn-slide:hover span.circle, .btn-slide2:hover span.circle2 {
+    left: 100%;
+    margin-left: -45px;
+    background-color: #fdfdfd;
+    color: #0099cc;
+}
+
+.btn-slide2:hover span.circle2 {
+    color: #efa666;
+}
+
+.btn-slide:hover span.title, .btn-slide2:hover span.title2 {
+    left: 40px;
+    opacity: 0;
+}
+
+.btn-slide:hover span.title-hover, .btn-slide2:hover span.title-hover2 {
+    opacity: 1;
+    left: 40px;
+}
+
+.btn-slide span.circle, .btn-slide2 span.circle2 {
+    display: block;
+    background-color: #0099cc;
+    color: #fff;
+    position: absolute;
+    float: left;
+    margin: 5px;
+    line-height: 42px;
+    height: 40px;
+    width: 40px;
+    top: 0;
+    left: 0;
+    transition: .5s;
+    border-radius: 50%;
+}
+
+.btn-slide2 span.circle2 {
+    background-color: #efa666;
+}
+
+.btn-slide span.title,
+  .btn-slide span.title-hover, .btn-slide2 span.title2,
+  .btn-slide2 span.title-hover2 {
+    position: absolute;
+    left: 90px;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 16px;
+    font-weight: bold;
+    color: #30abd5;
+    transition: .5s;
+}
+
+.btn-slide2 span.title2,
+  .btn-slide2 span.title-hover2 {
+    color: #efa666;
+    left: 80px;
+  }
+
+.btn-slide span.title-hover, .btn-slide2 span.title-hover2 {
+    left: 80px;
+    opacity: 0;
+}
+
+.btn-slide span.title-hover, .btn-slide2 span.title-hover2 {
+    color: #fff;
 }
 </style>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
@@ -635,15 +735,15 @@
                 <h4 class="Telecharger">Télécharger le fichier :</h4>
                 <div id="btn-download">
 
-                    <a href="{{ route('stock.report') }}" id="download">
-                        <svg width="22px" height="16px" viewBox="0 0 22 16">
-                            <path
-                                d="M2,10 L6,13 L12.8760559,4.5959317 C14.1180021,3.0779974 16.2457925,2.62289624 18,3.5 L18,3.5 C19.8385982,4.4192991 21,6.29848669 21,8.35410197 L21,10 C21,12.7614237 18.7614237,15 16,15 L1,15"
-                                id="check"></path>
-                            <polyline points="4.5 8.5 8 11 11.5 8.5" class="svg-out"></polyline>
-                            <path d="M8,1 L8,11" class="svg-out"></path>
-                        </svg>
-                    </a>
+                <div id="wrap">    
+                <a href="{{ route('stock.report') }}" id="download"  class="btn-slide2">
+  <span class="circle2"><i class="fa fa-download"></i></span>
+  <span class="title2">Download</span>
+  <span class="title-hover2">Click here</span>
+</a>
+</div>
+                  
+                </div>
                 </div>
             </div>
             @if (auth()->user()->role->name == 'Administrateur' || auth()->user()->role->name == 'Utilisateur Standard')
@@ -651,16 +751,14 @@
                 <h2 class="Rapport">Rapport Personnalisés:</h2>
                 <h4 class="Telecharger">Personnaliser votre rapport:</h4>
                 <div id="btn-download">
-
-                    <a href="{{ route('reports.index') }}" id="download">
-                        <svg width="22px" height="16px" viewBox="0 0 22 16">
-                            <path
-                                d="M2,10 L6,13 L12.8760559,4.5959317 C14.1180021,3.0779974 16.2457925,2.62289624 18,3.5 L18,3.5 C19.8385982,4.4192991 21,6.29848669 21,8.35410197 L21,10 C21,12.7614237 18.7614237,15 16,15 L1,15"
-                                id="check"></path>
-                            <polyline points="4.5 8.5 8 11 11.5 8.5" class="svg-out"></polyline>
-                            <path d="M8,1 L8,11" class="svg-out"></path>
-                        </svg>
-                    </a>
+                <div id="wrap">    
+                <a href="{{ route('reports.index') }}" id="download" class="btn-slide2">
+  <span class="circle2"><i class="fa fa-download"></i></span>
+  <span class="title2">Download</span>
+  <span class="title-hover2">Click here</span>
+</a>
+</div>
+                  
                 </div>
             </div>
             @endif
