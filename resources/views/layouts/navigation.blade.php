@@ -278,7 +278,7 @@
         </li>
     </ul>
     <div class="logout">
-        <a href="#"><i class="fas fa-power-off" style="color:red;"></i></a>
+        <a href="{{route('logout')}}"><i class="fas fa-power-off" style="color:red;"></i></a>
     </div>
 </div>
 
