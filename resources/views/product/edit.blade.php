@@ -1,16 +1,147 @@
 @extends('layouts.navigation')
 @section('content')
 <style>
-    .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto;
-        padding: 2rem;
-        max-width: 800px;
+      .container {
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* Full viewport height */
+            margin: 0; /* Remove any margin */
+            margin-left:20%;
+           
+        }
+
+        .submit-btn {
+            margin-left: 45%;
+            padding: 12px 24px;
+            background-color: green;
+            color: white;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: darkgreen;
+            transform: scale(1.05);
+        }
+
+        .submit-btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+        }
+
+        /* Styling for the form inputs and labels */
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+    h2, h3 {
+        color: #333;
+        font-size: 2rem; /* Increased font size for headings */
     }
 
+
+    .alert {
+        margin-bottom: 1.5rem; /* Increased margin */
+        padding: 1rem 1.25rem; /* Increased padding */
+        border-radius: 0.5rem;
+        color: white;
+        background-color: #28a745;
+        font-size: 1.1rem; /* Increased font size */
+    }
+
+    .mb-4 {
+        margin-bottom: 1.5rem; /* Increased margin */
+    }
+
+    .text-gray-700 {
+        color: #4a4a4a;
+        font-size: 1.1rem; /* Increased font size */
+    }
+
+    .font-bold {
+        font-weight: bold;
+    }
+
+    input, textarea {
+        width: 100%;
+        padding: 12px; /* Increased padding */
+        border: 1px solid #d1d1d1;
+        border-radius: 8px;
+        font-size: 1.1rem; /* Increased font size */
+        transition: border-color 0.2s ease;
+    }
+
+    input:focus, textarea:focus {
+        border-color: #4CAF50;
+        outline: none;
+    }
+
+    label {
+        font-weight: bold;
+        margin-bottom: 0.75rem; /* Increased margin-bottom */
+        display: block;
+        font-size: 1.1rem; /* Increased font size for labels */
+    }
+
+    .border {
+        border: 1px solid #e0e0e0;
+    }
+
+    .rounded {
+        border-radius: 8px;
+    }
+
+    .p-4 {
+        padding: 1.5rem; /* Increased padding */
+    }
+
+    .text-xl {
+        font-size: 1.5rem; /* Increased font size */
+    }
+
+    .font-semibold {
+        font-weight: 600;
+    }
+
+    .mt-4 {
+        margin-top: 1.5rem; /* Increased margin-top */
+    }
+
+    .mb-2 {
+        margin-bottom: 1rem; /* Increased margin-bottom */
+    }
+
+    textarea {
+        resize: vertical;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+        .container {
+            padding: 2rem; /* Adjusted padding for mobile */
+            max-width: 100%;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px; /* Adjusted padding */
+            font-size: 1.2rem; /* Adjusted font size */
+        }
+    }
     .submit-btn {
         padding: 12px 24px;
         background-color: green;
@@ -38,8 +169,9 @@
         color: white;
         background-color: green;
     }
+
 </style>
-<div class="container mx-auto">
+<div class="container "><br><br><br>
     <h2 class="text-2xl font-bold mb-4">Edit Product</h2>
 
     @if (session('success'))
@@ -161,5 +293,6 @@
             </button>
         </div>
     </form>
+    <br><br>
 </div>
 @endsection
