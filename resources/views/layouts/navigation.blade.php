@@ -258,6 +258,7 @@
             </li>
     
             <!-- Utilisateurs -->
+            @if(auth()->user()->role->name=='Administateur')
             <li class="dropdown">
                 <a href="#" onclick="toggleMenu(event)">
                     <i class="fas fa-user"></i> Utilisateurs <i class="fas fa-chevron-down"></i>
@@ -267,6 +268,7 @@
                     <li><a href="{{ route('users.create') }}">Ajouter Utilisateurs</a></li>
                 </ul>
             </li>
+            @endif
     
             <!-- Produits -->
             <li class="dropdown">

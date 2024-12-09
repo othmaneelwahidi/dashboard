@@ -646,6 +646,7 @@
                     </a>
                 </div>
             </div>
+            @if (auth()->user()->role->name == 'Administrateur' || auth()->user()->role->name == 'Utilisateur Standard')
             <div class="btn-bt">
                 <h2 class="Rapport">Rapport Personnalisés:</h2>
                 <h4 class="Telecharger">Personnaliser votre rapport:</h4>
@@ -662,7 +663,7 @@
                     </a>
                 </div>
             </div>
-
+            @endif
 
             <div class="content">
                 <div class="table">

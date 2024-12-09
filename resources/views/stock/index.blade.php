@@ -56,11 +56,13 @@
                     <td>
                         <a href="{{ route('stocks.show', $stock) }}" class="btn btn-info btn-sm">View</a>
                         <a href="{{ route('stocks.edit', $stock) }}" class="btn btn-warning btn-sm">Edit</a>
+                        @if(auth()->user()->role->name=='Administateur')
                         <form action="{{ route('stocks.destroy', $stock) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
                         </form>
+                        @endif
                     </td>
                 </tr>
             @endforeach

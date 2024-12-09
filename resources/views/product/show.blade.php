@@ -52,6 +52,8 @@
 
         {{-- Back Button --}}
         <a href="{{ route('produits.index') }}" class="text-blue-600 mt-4 inline-block">← Back to Products</a>
+        @if(auth()->user()->role->name=='Administateur')
         <a href="{{ route('produits.edit', $product->id) }}" class="text-green-600 mt-4 inline-block">Modifier Product</a>
+        @endif
     </div></div>
 @endsection

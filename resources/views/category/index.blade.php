@@ -52,11 +52,12 @@ h1{
             @foreach ($categories as $category)
                 <tr>
                     <td>{{ $category->nom }}</td>
-                    <td>{{ $category->parent ? $category->parent->nom : 'None' }}</td>
+                    <td>{{ $category->parent ? $category->parent->nom : '---' }}</td>
                     <td class="actions">
                         <a href="{{ route('categories.show', $category->id) }}">
                             <button>View</button>
                         </a>
+                        @if(auth()->user()->role->name=='Administateur')
                         <a href="{{ route('categories.edit', $category->id) }}">
                             <button>Edit</button>
                         </a>
@@ -65,6 +66,7 @@ h1{
                             @method('DELETE')
                             <button type="submit">Delete</button>
                         </form>
+                        @endif
                     </td>
                 </tr>
             @endforeach
