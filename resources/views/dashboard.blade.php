@@ -15,6 +15,91 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <style>
+            /* Media Query for Extra Small Screens (Phones) */
+@media (max-width: 576px) {
+    .chart-container {
+        width: 95%;
+        margin-left: 2%;
+        height: auto; /* Allow adaptive height */
+        padding: 10px;
+    }
+    .row {
+        padding: 10px;
+    }
+    .h3 {
+        font-size: 1.2rem;
+        margin-top: 10%;
+    }
+    .card {
+        flex-direction: column;
+    }
+    .main-content-inner {
+        margin-left: 5%;
+    }
+    table {
+        width: 100%;
+        margin-left: 0;
+        font-size: 12px;
+    }
+    #btn-download {
+        top: auto;
+        left: auto;
+        margin: 20px auto;
+    }
+}
+
+/* Media Query for Small Screens (Tablets) */
+@media (min-width: 577px) and (max-width: 768px) {
+    .chart-container {
+        width: 90%;
+        margin-left: 5%;
+        height: 400px;
+    }
+    .row {
+        padding: 10px 50px;
+    }
+    .h3 {
+        font-size: 1.4rem;
+        margin-right: 0;
+    }
+    table {
+        width: 80%;
+    }
+    .charts {
+        gap: 10px;
+    }
+}
+
+/* Media Query for Medium Screens (Laptops) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .chart-container {
+        width: 85%;
+        margin-left: 7.5%;
+    }
+    .h3 {
+        font-size: 1.6rem;
+        margin-top: 8%;
+    }
+    table {
+        width: 70%;
+        margin-left: 15%;
+    }
+}
+
+/* Media Query for Large Screens (Desktops) */
+@media (min-width: 1025px) {
+    .chart-container {
+        width: 80%;
+        margin-left: 10%;
+    }
+    .h3 {
+        font-size: 2rem;
+    }
+    table {
+        width: 60%;
+    }
+}
+
              .chart-container {
             width: 90%; /* Wider chart */
             max-width: 1000px; /* Bigger maximum size */
@@ -511,11 +596,7 @@ text-decoration: none;
                 <canvas id="lineChart" class="chart" style="width: 40%; margin: auto;"></canvas>
             </div>
 
-            <!-- Donut Chart for Stock Movements -->
-            <div>
-                <canvas id="donutChart"></canvas>
-            </div>
-        </div>
+           
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
             var ctxLine = document.getElementById('lineChart').getContext('2d');
