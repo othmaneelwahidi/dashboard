@@ -23,9 +23,7 @@
         height: auto; /* Allow adaptive height */
         padding: 10px;
     }
-    .row {
-        padding: 10px;
-    }
+   
     .h3 {
         font-size: 1.2rem;
         margin-top: 10%;
@@ -55,9 +53,7 @@
         margin-left: 5%;
         height: 400px;
     }
-    .row {
-        padding: 10px 50px;
-    }
+
     .h3 {
         font-size: 1.4rem;
         margin-right: 0;
@@ -124,7 +120,7 @@
         .row {
             margin: 0; /* Remove the left margin to avoid overflow */
             overflow-x: auto; /* Handles horizontal overflow */
-            padding: 15px 130px ;
+            padding: 15px 70px ;
         }
 
         .h3 {
@@ -166,14 +162,7 @@
                 padding-top: 50px;
             }
 
-            .row {
-                margin: 0;
-                /* Remove the left margin to avoid overflow */
-                overflow-x: auto;
-                /* Handles horizontal overflow */
-                padding: 15px 130px;
-            }
-
+        
             .h3 {
                 position: relative;
                 display: inline-block;
@@ -246,10 +235,7 @@
 
             /* Added this for responsiveness and overflow control */
             @media (max-width: 768px) {
-                .row {
-                    margin-left: 0;
-                }
-
+              
                 .col-md-4 {
                     width: 100%;
                     /* Ensures cards stack vertically */
@@ -546,20 +532,24 @@
                 margin-left: 10%;
                 margin-top: 3%;
             }
-        </style>
+.row{
+    margin-left:10%;
+}
+</style>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
     </head>
 
     <body>
+        
         <div id="low-stock-warning" class="low-stock-notification d-block">
             ⚠️ Low stock: less than 10 products available!
             <button type="button" class="btn-close" aria-label="Close" style="color:white;">X</button>
         </div>
 
 
-        <div class="main-content-inner">
+        <div class="main-content-inner" style="margin-left: 250px;">
             <div class="row">
                 <h1 class="h3">Bonjour Admin</h1>
             </div>

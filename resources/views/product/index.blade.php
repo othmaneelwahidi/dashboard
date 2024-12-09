@@ -6,18 +6,25 @@
         align-items: center;
         justify-content: center;
         height: 100vh;
-        margin: 0;
-        margin-top: -55%;
+        
+       
+  
     }
-
+.containerr{
+    margin-top:-50%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    margin-left:-4%;
+}
     .table-container {
         overflow-x: auto;
         white-space: nowrap;
+        
     }
 
     /* Adjusting table and cell size */
     table {
-        width: 70%; /* Smaller table width */
+        width: 50%; /* Smaller table width */
         margin: 0 auto; /* Center the table */
         border-collapse: collapse; /* Remove gaps between cells */
         font-size: 12px; /* Reduce font size */
@@ -39,11 +46,12 @@
     }
 
     #form {
-        margin-left: 10%;
+        
+        margin-left: 30%;
     }
     </style>
-
-    <div class="container mx-auto p-4">
+<div class="containerr">
+    <div class="container ">
         @if (session('error'))
             <div class="alert alert-danger">
                 {{ session('error') }}
@@ -106,5 +114,5 @@
                 </tbody>
             </table>
         </div>
-    </div>
+    </div></div>
 </x-app-layout>

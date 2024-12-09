@@ -250,11 +250,14 @@
     <div class="sidebar">
         <h1>Dashboard</h1>
         <ul>
+            <!-- General -->
             <li>
                 <a href="{{ route('dashboard') }}">
                     <i class="fas fa-tachometer-alt"></i> General
                 </a>
             </li>
+    
+            <!-- Utilisateurs -->
             <li class="dropdown">
                 <a href="#" onclick="toggleMenu(event)">
                     <i class="fas fa-user"></i> Utilisateurs <i class="fas fa-chevron-down"></i>
@@ -264,6 +267,8 @@
                     <li><a href="{{ route('users.create') }}">Ajouter Utilisateurs</a></li>
                 </ul>
             </li>
+    
+            <!-- Produits -->
             <li class="dropdown">
                 <a href="#" onclick="toggleMenu(event)">
                     <i class="fas fa-box"></i> Produits <i class="fas fa-chevron-down"></i>
@@ -273,6 +278,8 @@
                     <li><a href="{{ route('produits.create') }}">Ajouter Produits</a></li>
                 </ul>
             </li>
+    
+            <!-- Catégorie -->
             <li class="dropdown">
                 <a href="#" onclick="toggleMenu(event)">
                     <i class="fas fa-th"></i> Catégorie <i class="fas fa-chevron-down"></i>
@@ -282,9 +289,11 @@
                     <li><a href="{{ route('categories.create') }}">Ajouter Catégorie</a></li>
                 </ul>
             </li>
+    
+            <!-- Stocks -->
             <li class="dropdown">
                 <a href="#" onclick="toggleMenu(event)">
-                    <i class="fas fa-warehouse"></i> Stocks<i class="fas fa-chevron-down">
+                    <i class="fas fa-warehouse"></i> Stocks <i class="fas fa-chevron-down"></i>
                 </a>
                 <ul class="submenu">
                     <li><a href="{{ route('stocks.index') }}">Liste stock</a></li>
@@ -292,11 +301,13 @@
                 </ul>
             </li>
         </ul>
+    
+        <!-- Logout -->
         <div class="logout">
             <a href="#"><i class="fas fa-power-off" style="color:red;"></i></a>
         </div>
     </div>
-
+    
 
 
 
