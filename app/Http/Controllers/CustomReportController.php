@@ -22,8 +22,7 @@ class CustomReportController extends Controller
         $request->validate([
             'format' => 'required|in:pdf,excel,csv',
             'category_id' => 'nullable|exists:category,id',
-            'date_from' => 'nullable|date',
-            'date_to' => 'nullable|date',
+            'date_action' => 'nullable|date',
             'movement_type' => 'nullable|in:entry,exit,ajustment',
         ]);
 
@@ -43,8 +42,8 @@ class CustomReportController extends Controller
         }
 
         // Filter by date range
-        if ($request->filled('date_from') && $request->filled('date_to')) {
-            $query->whereBetween('created_at', [$request->date_from, $request->date_to]);
+        if ($request->filled('date_action')) {
+            $query->whereBetween('created_at', [$request->date_action]);
         }
 
         $stocks = $query->with('product', 'user')->get();

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.navigation')
 
 @section('content')
 <div class="container">
@@ -26,18 +26,14 @@
         </div>
 
         <div class="form-group">
-            <label for="date_from">Date de début</label>
-            <input type="date" id="date_from" name="date_from" class="form-control">
-        </div>
-        
-        <div class="form-group">
-            <label for="date_to">Date de fin</label>
-            <input type="date" id="date_to" name="date_to" class="form-control">
+            <label for="date_from">Date d'action</label>
+            <input type="date" id="date_action" name="date_from" class="form-control">
         </div>
         
         <div class="form-group">
             <label for="format">Format d'exportation</label>
             <select id="format" name="format" class="form-control">
+                <option value="" selected disabled>choisir la format de votre rapport</option>
                 <option value="pdf">PDF</option>
                 <option value="excel">Excel</option>
                 <option value="csv">CSV</option>
