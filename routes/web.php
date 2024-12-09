@@ -1,9 +1,11 @@
 <?php
 use App\Exports\UsersExport;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StockController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 //dashboard
@@ -31,7 +33,13 @@ Route::delete('/produit/{id}', [ProduitController::class, 'destroy'])->name('pro
 Route::get('/product/{id}/attribute', [ProduitController::class, 'indexAttribute'])->name('index.attribute');
 Route::post('/product/{id}/attribute', [ProduitController::class, 'storeAttribute'])->name('store.attribute');
 
+//category
+Route::resource('categories', CategoryController::class);
+Route::post('categories/{id}/attach-products', [CategoryController::class, 'attachProducts'])->name('categories.attach-products');
+Route::post('categories/{id}/detach-products', [CategoryController::class, 'detachProducts'])->name('categories.detach-products');
 
+//stock
+Route::resource('stocks', StockController::class);
 
 // Define the route for Barchart
 Route::get('/Barchart', function () {
