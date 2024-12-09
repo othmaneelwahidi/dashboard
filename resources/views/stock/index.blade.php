@@ -1,5 +1,35 @@
 @extends('layouts.navigation')
 @section('content')
+<style>
+    /* Make the table smaller */
+.table {
+    font-size: 0.875rem; /* Smaller font size */
+    width: 80%; /* Ensure table takes full width */
+    table-layout: fixed; /* Fix the column width */
+}
+
+.table th, .table td {
+    padding: 0.5rem; /* Reduce padding for smaller cells */
+    text-align: center; /* Center text in cells */
+}
+
+/* Customize table headers */
+.table th {
+    font-weight: bold; /* Make headers bold */
+}
+
+
+
+/* Optional: Style buttons to match the smaller table */
+.btn-sm {
+    padding: 0.25rem 0.5rem; /* Adjust button padding */
+    font-size: 0.75rem; /* Reduce button font size */
+}
+.container{
+    margin-left:30%;
+    margin-top:5%;
+}
+</style>
 <div class="container">
     <h1>Stocks</h1>
     <table class="table table-striped">

@@ -127,7 +127,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  const totalProduct = <?php echo $totalProduct; ?>; // Assuming you're using PHP to output the value
+  const totalProduct = $totalProduct; ; // Assuming you're using PHP to output the value
 
   const badgeSonar = document.getElementById('badge-sonar');
 
@@ -141,7 +141,7 @@
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         // Accessing the total product count dynamically from the server-side variable
-        const totalProduits = {{ $totalProduct }}; // Replace with the server-side variable passed from the controller
+        const totalProduits = $totalProduct ; // Replace with the server-side variable passed from the controller
 
         const lowStockWarning = document.getElementById("low-stock-warning");
 

@@ -1,6 +1,12 @@
 @extends('layouts.navigation')
 
 @section('content')
+<style>
+    .container{
+        margin-left:20%;
+        margin-top:5%;
+    }
+</style>
 <div class="container">
     <h1>Add Stock</h1>
     <form action="{{ route('stocks.store') }}" method="POST">

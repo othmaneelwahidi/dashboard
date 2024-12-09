@@ -2,7 +2,7 @@
 @section('content')
     <style>
         table {
-            width: 100%;
+            width: 80%;
             border-collapse: collapse;
             margin: 20px 0;
         }
@@ -18,7 +18,9 @@
             padding: 8px;
             text-align: left;
         }
-
+h1{
+    margin-bottom:5%;
+}
         th {
             background-color: #f2f2f2;
         }
@@ -26,7 +28,12 @@
         .actions button {
             margin-right: 5px;
         }
+        .Categories{
+            margin-top:6%;
+            margin-left:20%;
+        }
     </style>
+    <div class="Categories">
     <h1>Categories</h1>
 
     @if (session('success'))
@@ -62,5 +69,5 @@
                 </tr>
             @endforeach
         </tbody>
-    </table>
+    </table></div>
 @endsection
