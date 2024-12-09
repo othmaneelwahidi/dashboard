@@ -1,6 +1,7 @@
 <?php
 use App\Exports\UsersExport;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomReportController;
 use App\Http\Controllers\DashboardController;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\ProduitController;
@@ -40,6 +41,9 @@ Route::post('categories/{id}/detach-products', [CategoryController::class, 'deta
 
 //stock
 Route::resource('stocks', StockController::class);
+//raports
+Route::get('/custom-reports', [CustomReportController::class, 'index'])->name('reports.index');
+Route::post('/custom-reports/export', [CustomReportController::class, 'export'])->name('reports.export');
 
 // Define the route for Barchart
 Route::get('/Barchart', function () {
