@@ -646,6 +646,93 @@
     margin-top:8%;
     margin-left:30%;
 }
+/* General chart container styling */
+canvas {
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid #444;
+}
+
+/* Line Chart specific styling */
+#lineChart {
+    width: 100%;
+    height: 400px;
+    border-radius: 10px;
+    background-image: linear-gradient(to bottom, #2e3b4e, #1f2937);
+    border: 1px solid #3a4754;
+}
+
+#lineChart .chartjs-tooltip {
+    background-color: rgba(0, 0, 0, 0.75);
+    border-radius: 5px;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#lineChart .chartjs-tooltip .tooltip-inner {
+    font-size: 14px;
+    padding: 5px 10px;
+}
+
+/* Donut Chart specific styling */
+#donutChart {
+    width: 100%;
+    height: 400px;
+    border-radius: 50%;
+    background-image: linear-gradient(to bottom, #1a202c, #2d3748);
+    border: 1px solid #444;
+}
+
+#donutChart .chartjs-tooltip {
+    background-color: rgba(0, 0, 0, 0.75);
+    border-radius: 5px;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#donutChart .chartjs-tooltip .tooltip-inner {
+    font-size: 14px;
+    padding: 5px 10px;
+}
+
+/* Customize the tooltip arrow */
+.chartjs-tooltip .tooltip-arrow {
+    border-color: rgba(0, 0, 0, 0.75) !important;
+}
+
+/* Tooltip styling */
+.chartjs-tooltip {
+    opacity: 0.9 !important;
+    padding: 10px;
+    font-size: 12px;
+    background-color: rgba(51, 51, 51, 0.8);
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Interactive hover effects */
+
+
+/* Styling for chart legends */
+.chartjs-legend {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 0;
+}
+
+/* Line chart data set hover effect */
+.chartjs-render-monitor .dataset-hover {
+    transition: all 0.3s ease;
+}
+
+.chartjs-render-monitor .dataset-hover:hover {
+    border-width: 3px;
+    box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.6);
+}
+
 </style>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
