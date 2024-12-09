@@ -94,16 +94,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-<div class="gap">
-            <li class="nav-item">
-    <a href="#" class="nav-link position-relative">
-        <i class="fa fa-bell" id="bell"></i>
-       
-            <span class="badge-sonar"></span>
-   
-    </a>
-</li>
+            <div class="gap">
+    <li class="nav-item">
+        <a href="#" class="nav-link position-relative">
+            <i class="fa fa-bell" id="bell"></i>
+            <span class="badge-sonar" id="sonar"></span>
+        </a>
+    </li>
 </div>
+
 
                 <li class="nav-item">
                     
@@ -127,5 +126,53 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const totalProduct = <?php echo $totalProduct; ?>; // Assuming you're using PHP to output the value
+
+  const badgeSonar = document.getElementById('badge-sonar');
+
+  // Check if totalProduct is less than 10 to display the sonar
+  if (totalProduct < 10) {
+    badgeSonar.style.display = 'inline-block'; // Show the sonar
+  } else {
+    badgeSonar.style.display = 'none'; // Hide the sonar
+  }
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Accessing the total product count dynamically from the server-side variable
+        const totalProduits = {{ $totalProduct }}; // Replace with the server-side variable passed from the controller
+
+        const lowStockWarning = document.getElementById("low-stock-warning");
+
+        // Show the low-stock warning if the count is less than 10
+        if (totalProduits < 10) {
+            lowStockWarning.classList.remove("d-none");
+            lowStockWarning.classList.add("d-block");
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const closeButton = document.querySelector("#low-stock-warning .btn-close");
+        const lowStockWarning = document.getElementById("low-stock-warning");
+
+        closeButton.addEventListener("click", () => {
+            if (lowStockWarning) {
+                lowStockWarning.classList.remove("d-block");
+                lowStockWarning.classList.add("d-none");
+            } else {
+                console.error("Low stock warning element not found!");
+            }
+        });
+
+        // Animation for the .Rapport element when clicked
+        document.querySelector('.Rapport').addEventListener('click', function () {
+            this.classList.add('downloaded');
+            setTimeout(() => this.classList.remove('downloaded'), 2000); // Reset animation after 2 seconds
+        });
+    });
+</script>
+
 </body>
+
 </html>
