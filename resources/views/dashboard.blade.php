@@ -295,7 +295,8 @@ text-decoration: none;
 }
 /* Button Base Styles */
 #btn-download {
-    margin-top:8%;
+    margin-left: -10%;
+    margin-top: 10%;
   cursor: pointer;
   display: block;
   width: 52px;
@@ -309,9 +310,7 @@ text-decoration: none;
   transition: background 0.3s ease;
 }
 
-#btn-download:hover {
-  background: rgba(34, 50, 84, 0.03); /* Slight hover background */
-}
+
 
 /* SVG Styles */
 #btn-download svg {
