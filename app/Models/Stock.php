@@ -29,19 +29,13 @@ class Stock extends Model
         'reason',
     ];
 
-    /**
-     * Get the product associated with the stock movement.
-     */
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class, 'product_id');
     }
 
-    /**
-     * Get the user associated with the stock movement.
-     */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

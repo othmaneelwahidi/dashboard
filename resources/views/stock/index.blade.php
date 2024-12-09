@@ -32,6 +32,16 @@
 </style>
 <div class="container">
     <h1>Stocks</h1>
+    <form action="{{ route('stock.import') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="mb-3">
+            <label for="file" class="form-label">Import Stock Data</label>
+            <input type="file" name="file" id="file" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-success">Import</button>
+    </form> 
+    <a href="{{ route('stock.export') }}" class="btn btn-primary">Export Stock Data</a>
+    
     <table class="table table-striped">
         <thead>
             <tr>

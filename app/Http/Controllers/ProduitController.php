@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ProductExport;
+use App\Imports\ProductImport;
 use App\Models\Attribute;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProduitController extends Controller
 {
@@ -38,15 +41,24 @@ class ProduitController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:1000',
-            'sku' => 'required|string|max:255',
-            'barcode' => 'required|string|max:255',
+            'sku' => 'required|string|max:255|unique:product,sku',
+            'barcode' => 'required|string|max:255|unique:product,code_barre',  // Ensure barcode is unique
             'prix' => 'required|numeric',
             'min_quantity' => 'required|numeric',
             'max_quantity' => 'required|numeric',
             'supplier' => 'required|string|max:255',
         ]);
 
-        // Save data
+        // Check if product already exists by SKU or Barcode
+        $existingProduct = Product::where('sku', $validated['sku'])
+            ->orWhere('code_barre', $validated['barcode'])
+            ->first();
+
+        if ($existingProduct) {
+            return redirect()->back()->withErrors('Le produit avec le même SKU ou code barre existe déjà.');
+        }
+
+        // Save data if product doesn't exist
         Product::create([
             'name' => $validated['name'],
             'description' => $validated['description'],
@@ -61,6 +73,7 @@ class ProduitController extends Controller
         // Redirect with success message
         return redirect()->route('produits.index')->with('success', 'Produit créé avec succès');
     }
+
     public function edit($id)
     {
         $product = Product::findOrFail($id);
@@ -179,5 +192,22 @@ class ProduitController extends Controller
         $product = Product::findOrFail($id);
         $attributes = Attribute::where('product_id', $id)->get();
         return view('product.show', compact('product', 'attributes'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new ProductExport, 'products.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,csv,ods|max:2048',
+        ]);
+
+        // Import the file
+        Excel::import(new ProductImport, $request->file('file'));
+
+        return redirect()->route('produits.index')->with('success', 'Products imported successfully.');
     }
 }

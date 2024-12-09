@@ -26,7 +26,7 @@
                 <option value="" disabled selected>Select Movement Type</option>
                 <option value="entry">Entry</option>
                 <option value="exit">Exit</option>
-                <option value="adjustment">Adjustment</option>
+                <option value="ajustment">Adjustment</option>
             </select>
         </div>
         <div class="mb-3">

@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\StockExport;
+use App\Imports\StockImport;
 use App\Models\Stock;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StockController extends Controller
 {
@@ -41,8 +45,8 @@ class StockController extends Controller
     {
         $validated = $request->validate([
             'product_id' => 'required|exists:product,id',
-            'movement_type' => 'required|in:entry,exit,adjustment', // Validate enum values
-            'quantity' => 'required|integer|min:1', // Ensure positive quantities
+            'movement_type' => 'required|in:entry,exit,ajustment', // Validate enum values
+            'quantity' => 'required|integer|min:0', // Ensure positive quantities
             'reason' => 'nullable|string|max:255', // Optional, with max length
         ]);
 
@@ -87,14 +91,27 @@ class StockController extends Controller
      */
     public function update(Request $request, Stock $stock)
     {
+        // Validate the incoming request data
         $validated = $request->validate([
             'product_id' => 'sometimes|exists:product,id',
-            'movement_type' => 'sometimes|in:entry,exit,adjustment', // Validate enum values
-            'quantity' => 'sometimes|integer|min:1', // Ensure positive quantities
-            'reason' => 'nullable|string|max:255', // Optional, with max length
+            'movement_type' => 'sometimes|in:entry,exit,ajustment',
+            'quantity' => 'sometimes|integer|min:0', // Ensure quantity is non-negative
+            'reason' => 'nullable|string|max:255',
         ]);
 
-        $stock->update($validated);
+        // Check if the stock record is found
+        if (!$stock) {
+            return back()->with('error', 'Stock record not found.');
+        }
+
+        // Update the stock record with the validated data
+        try {
+            $stock->update($validated);
+        } catch (\Exception $e) {
+            // Log any error during the update process
+            Log::error('Error updating stock:', ['error' => $e->getMessage()]);
+            return back()->with('error', 'An error occurred while updating the stock.');
+        }
 
         return redirect()->route('stocks.index')->with('success', 'Stock updated successfully.');
     }
@@ -110,5 +127,21 @@ class StockController extends Controller
         $stock->delete();
 
         return redirect()->route('stocks.index')->with('success', 'Stock deleted successfully.');
+    }
+
+    public function export()
+    {
+        return Excel::download(new StockExport, 'stock_data.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,csv',
+        ]);
+
+        Excel::import(new StockImport, $request->file('file'));
+
+        return redirect()->route('stocks.index')->with('success', 'Stock data imported successfully!');
     }
 }

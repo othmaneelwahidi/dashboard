@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\RapportExport;
 use Illuminate\Http\Request;
 use App\Models\Stock;
 use App\Models\Category;
@@ -54,7 +55,7 @@ class CustomReportController extends Controller
             return $pdf->download('stock-report.pdf');
         } elseif (in_array($request->format, ['excel', 'csv'])) {
             $fileName = 'stock-report.' . $request->format;
-            return Excel::download(new StockExport($stocks), $fileName);
+            return Excel::download(new RapportExport($stocks), $fileName);
         }
     }
 }

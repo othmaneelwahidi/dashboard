@@ -2,21 +2,41 @@
 
 namespace App\Exports;
 
-use Illuminate\Contracts\View\View;
-use Maatwebsite\Excel\Concerns\FromView;
+use App\Models\Stock;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
 
-class StockExport implements FromView
+class StockExport implements FromCollection, WithHeadings, WithMapping
 {
-    protected $stocks;
-
-    public function __construct($stocks)
+    public function collection()
     {
-        $this->stocks = $stocks;
+        return Stock::with('product', 'user')->get();
     }
 
-    public function view(): View
+    public function headings(): array
     {
-        return view('reports.stock-excel', ['stocks' => $this->stocks]);
+        return [
+            'Stock ID',
+            'Product Name',
+            'User Name',
+            'Movement Type',
+            'Quantity',
+            'Reason',
+            'Created At',
+        ];
+    }
+
+    public function map($stock): array
+    {
+        return [
+            $stock->id,
+            $stock->product->name ?? 'N/A',
+            $stock->user->name ?? 'N/A',
+            ucfirst($stock->movement_type),
+            $stock->quantity,
+            $stock->reason,
+            $stock->created_at->now(),
+        ];
     }
 }
-

@@ -55,31 +55,31 @@ class DashboardController extends Controller
 
     public function generateReport(Request $request)
     {
-        // Fetch all stock movements with related product details
-        $stockLevels = Stock::with('product')->get(); // Get all stock movements with product details
+        $stockLevels = Stock::with('product')->get();
 
-        // Get products that are out of stock (quantity = 0 in stock)
-        $outOfStockProducts = Product::join('stock', 'product.id', '=', 'stock.product_id')
-            ->where('stock.quantity', 0)
+        $outOfStockProducts = Product::with('stock')
+            ->whereHas('stock', function ($query) {
+                $query->where('quantity', 0);
+            })
             ->get();
 
-        // Get low stock products (quantity < qte_min)
-        $lowStockProducts = Product::join('stock', 'product.id', '=', 'stock.product_id')
-            ->whereColumn('stock.quantity', '<', 'product.qte_min')
+        $lowStockProducts = Product::with('stock')
+            ->whereHas('stock', function ($query) {
+                $query->whereColumn('quantity', '<', 'qte_min');
+            })
             ->get();
 
-        // Get products where quantity is between qte_min and qte_max (inclusive)
-        $normalStockProducts = Product::join('stock', 'product.id', '=', 'stock.product_id')
-            ->whereColumn('stock.quantity', '>=', 'product.qte_min')
-            ->whereColumn('stock.quantity', '<=', 'product.qte_max')
+        $normalStockProducts = Product::with('stock')
+            ->whereHas('stock', function ($query) {
+                $query->whereColumn('quantity', '>=', 'qte_min')
+                    ->whereColumn('quantity', '<=', 'qte_max');
+            })
             ->get();
 
-        // Get stock movement counts for different types
         $entryStockCount = Stock::where('movement_type', 'entry')->count();
         $exitStockCount = Stock::where('movement_type', 'exit')->count();
         $adjustmentStockCount = Stock::where('movement_type', 'ajustment')->count();
 
-        // Prepare data for the report
         $data = [
             'stockLevels' => $stockLevels,
             'outOfStockProducts' => $outOfStockProducts,
@@ -88,15 +88,14 @@ class DashboardController extends Controller
             'entryStockCount' => $entryStockCount,
             'exitStockCount' => $exitStockCount,
             'adjustmentStockCount' => $adjustmentStockCount,
-            'date' => now()->toDateString(), // Current date
+            'date' => now()->toDateString(),
         ];
 
-        // Load a Blade view to generate the PDF
         $pdf = Pdf::loadView('reports.stock_report', $data);
 
-        // Return the generated PDF to the browser
         return $pdf->download('global_report.pdf');
     }
+
 
     public function showActions()
     {

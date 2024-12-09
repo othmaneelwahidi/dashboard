@@ -45,6 +45,11 @@ class Product extends Model
         return $this->hasMany(Stock::class);
     }
 
+    public function stock()
+    {
+        return $this->hasOne(Stock::class, 'product_id');
+    }
+
     public function attributes()
     {
         return $this->hasMany(Attribute::class);

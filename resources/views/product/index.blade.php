@@ -77,7 +77,15 @@
 
 
             <h2 class="text-xl font-bold mb-4">Liste des Produits</h2>
-
+            <a href="{{ route('products.export') }}" class="btn btn-success">Export Products</a>
+            <form action="{{ route('products.import') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group">
+                    <label for="file">Import Products (Excel/CSV)</label>
+                    <input type="file" name="file" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Import</button>
+            </form>            
             <div class="table-container" id="form">
                 <table class="min-w-full bg-white border border-gray-200">
                     <thead class="bg-gray-200 text-gray-600">

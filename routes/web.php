@@ -30,6 +30,8 @@ Route::get('/produits/{id}/edit', [ProduitController::class, 'edit'])->name('pro
 Route::get('/produits/{id}/show', [ProduitController::class, 'show'])->name('produits.show');
 Route::put('/produits/{id}', [ProduitController::class, 'update'])->name('produits.update');
 Route::delete('/produit/{id}', [ProduitController::class, 'destroy'])->name('produit.destroy');
+Route::get('products/export', [ProduitController::class, 'export'])->name('products.export');
+Route::post('products/import', [ProduitController::class, 'import'])->name('products.import');
 //attribute
 Route::get('/product/{id}/attribute', [ProduitController::class, 'indexAttribute'])->name('index.attribute');
 Route::post('/product/{id}/attribute', [ProduitController::class, 'storeAttribute'])->name('store.attribute');
@@ -41,6 +43,8 @@ Route::post('categories/{id}/detach-products', [CategoryController::class, 'deta
 
 //stock
 Route::resource('stocks', StockController::class);
+Route::get('/export-stock', [StockController::class, 'export'])->name('stock.export');
+Route::post('/import-stock', [StockController::class, 'import'])->name('stock.import');
 //raports
 Route::get('/custom-reports', [CustomReportController::class, 'index'])->name('reports.index');
 Route::post('/custom-reports/export', [CustomReportController::class, 'export'])->name('reports.export');
