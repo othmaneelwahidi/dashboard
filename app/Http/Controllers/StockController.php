@@ -53,6 +53,22 @@ class StockController extends Controller
         // Add the authenticated user's ID
         $validated['user_id'] = Auth::id();
 
+        // Get the product based on product_id
+        $product = Product::findOrFail($validated['product_id']);
+
+        // Handle stock movement based on the movement type
+        if ($validated['movement_type'] == 'entry') {
+            $product->stock += $validated['quantity'];  // Add to stock
+        } elseif ($validated['movement_type'] == 'exit') {
+            $product->stock -= $validated['quantity'];  // Subtract from stock
+        } elseif ($validated['movement_type'] == 'ajustment') {
+            $product->stock = $validated['quantity'];  // Set stock to the new quantity
+        }
+
+        // Save the updated product stock
+        $product->save();
+
+        // Create the stock movement record
         Stock::create($validated);
 
         return redirect()->route('stocks.index')->with('success', 'Stock created successfully.');
@@ -104,6 +120,23 @@ class StockController extends Controller
             return back()->with('error', 'Enregistrement de stock non trouvé.');
         }
 
+        // Get the associated product
+        $product = Product::findOrFail($stock->product_id);
+
+        // Handle stock movement based on the movement type
+        if (isset($validated['movement_type'])) {
+            if ($validated['movement_type'] == 'entry') {
+                $product->stock += $validated['quantity'];  // Add to stock
+            } elseif ($validated['movement_type'] == 'exit') {
+                $product->stock -= $validated['quantity'];  // Subtract from stock
+            } elseif ($validated['movement_type'] == 'ajustment') {
+                $product->stock = $validated['quantity'];  // Set stock to the new quantity
+            }
+        }
+
+        // Save the updated product stock
+        $product->save();
+
         // Update the stock record with the validated data
         try {
             $stock->update($validated);
@@ -124,6 +157,23 @@ class StockController extends Controller
      */
     public function destroy(Stock $stock)
     {
+        // Get the associated product
+        $product = Product::findOrFail($stock->product_id);
+
+        // Revert stock changes based on the movement type before deleting
+        if ($stock->movement_type == 'entry') {
+            $product->stock -= $stock->quantity;  // Remove the quantity from stock
+        } elseif ($stock->movement_type == 'exit') {
+            $product->stock += $stock->quantity;  // Add the quantity back to stock
+        } elseif ($stock->movement_type == 'ajustment') {
+            // For adjustment, we can either leave the stock as is or reset it
+            $product->stock = 0;  // This is an example, depending on business logic
+        }
+
+        // Save the updated product stock
+        $product->save();
+
+        // Delete the stock record
         $stock->delete();
 
         return redirect()->route('stocks.index')->with('success', 'Stock supprimé avec succès.');

@@ -177,19 +177,21 @@
                                 <span class="badge-sonar" id="sonar"
                                     style="{{ $lowStockCount > 0 ? 'display: inline-block;' : 'display: none;' }}">
                                 </span>
+                                <span class="notification-count">{{ $lowStockProducts->count() }}</span>
                             </a>
                             <!-- Dropdown container -->
                             <div id="notification-dropdown" class="dropdown-container">
                                 <ul>
-                                    @if($lowStockProducts->count() > 0)
-                                        @foreach($lowStockProducts as $product)
-                                            <li>⚠️ Low stock: {{ $product->name }} ({{ $product->total_stock }} left).</li>
+                                    @if ($lowStockProducts->count() > 0)
+                                        @foreach ($lowStockProducts as $product)
+                                            <li>⚠️ Low stock: {{ $product->name }} ({{ $product->total_stock }} left).
+                                            </li>
                                         @endforeach
                                     @else
                                         <li>No new notifications.</li>
                                     @endif
                                 </ul>
-                            </div>                            
+                            </div>
                         </li>
                     </div>
 
@@ -267,7 +269,7 @@
             // Ensure the dropdown is hidden by default
             notificationDropdown.style.display = "none";
 
-            // Add click event listener to the bell
+            // Add click event listener to the bell icon
             bellNotification.addEventListener("click", function(e) {
                 e.preventDefault();
                 // Toggle dropdown visibility
@@ -279,7 +281,7 @@
                 }
             });
 
-            // Optional: Close dropdown when clicking outside
+            // Close dropdown when clicking outside
             document.addEventListener("click", function(event) {
                 if (!bellNotification.contains(event.target) && !notificationDropdown.contains(event
                     .target)) {

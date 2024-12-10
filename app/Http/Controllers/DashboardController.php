@@ -39,13 +39,19 @@ class DashboardController extends Controller
 
         $actions = Action::with('user')->orderBy('created_at', 'desc')->take(3)->get();
 
-        $lowStockProducts = DB::table('stock')
-            ->select('product.name', DB::raw('SUM(CASE WHEN movement_type = "entry" THEN quantity ELSE -quantity END) as total_stock'))
-            ->join('product', 'stock.product_id', '=', 'product.id')
-            ->groupBy('product.id', 'product.name')
-            ->having('total_stock', '<', 10)
-            ->get();
-
+        $lowStockProducts = Product::with(['stock' => function ($query) {
+            $query->selectRaw('product_id, sum(quantity) as total_stock')  // Sum the stock quantities
+                  ->groupBy('product_id');  // Group by product_id
+        }])
+        ->joinSub(
+            Stock::selectRaw('product_id, sum(quantity) as total_stock')  // Select and sum stock quantities
+                ->groupBy('product_id'), 'stock_sum', function ($join) {
+                    $join->on('product.id', '=', 'stock_sum.product_id')  // Join with product by id
+                         ->whereRaw('stock_sum.total_stock < product.qte_min');  // Apply condition on total_stock
+                })
+        ->get();
+        
+        
         $lowStockCount = $lowStockProducts->count();
 
         return view('dashboard', compact(
