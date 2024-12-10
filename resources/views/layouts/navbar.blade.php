@@ -120,11 +120,14 @@
                         <li class="nav-item">
                             <a href="#" class="nav-link position-relative">
                                 <i class="fa fa-bell" id="bell"></i>
-                                <span class="badge-sonar" id="sonar" 
-                                      style="{{ $lowStockCount > 0 ? 'display: inline-block;' : 'display: none;' }}">
+                                <span class="badge-sonar" id="sonar"
+                                    style="{{ $lowStockCount > 0 ? 'display: inline-block;' : 'display: none;' }}">
                                 </span>
-                            </a>                            
+                            </a>
                         </li>
+
+                        <!-- Hidden container for displaying product-specific warnings -->
+                        <div id="low-stock-warning-container" class="d-none"></div>
                     </div>
 
 
@@ -132,7 +135,7 @@
 
                         <a class="nav-link active" aria-current="page" href="{{ route('Userprofile') }}">
                             <div class="profile-icon">
-                                <i class="fas fa-user"></i> 
+                                <i class="fas fa-user"></i>
                             </div>
                         </a>
                     </li>
@@ -152,11 +155,11 @@
     <script>
         const lowStockCount = @json($lowStockCount); // Pass the PHP variable to JavaScript
         const badgeSonar = document.getElementById('sonar');
-    
+
         // Check if the low stock count is greater than 0
         badgeSonar.style.display = lowStockCount > 0 ? 'inline-block' : 'none';
     </script>
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             // Accessing the total product count dynamically from the server-side variable
@@ -188,8 +191,30 @@
             document.querySelector('.Rapport').addEventListener('click', function() {
                 this.classList.add('downloaded');
                 setTimeout(() => this.classList.remove('downloaded'),
-                2000); // Reset animation after 2 seconds
+                    2000); // Reset animation after 2 seconds
             });
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // Simulated data passed from the server-side
+            const lowStockProducts = @json($lowStockProducts); // Converts the PHP array to a JS object
+
+            if (lowStockProducts.length > 0) {
+                lowStockProducts.forEach(product => {
+                    JoltyUI.toast({
+                        title: "⚠️ Attention",
+                        message: `Le produit "${product.name}" est faible en stock: seulement ${product.total_stock} restant(s)!`,
+                        type: "warning",
+                        duration: 5000, // 5 seconds
+                    });
+                });
+
+                // Optionally, show the warning container with additional details
+                const container = document.getElementById("low-stock-warning-container");
+                container.innerHTML = lowStockProducts.map(product =>
+                    `<p>Produit: ${product.name} - Stock restant: ${product.total_stock}</p>`).join('');
+                container.classList.remove("d-none");
+            }
         });
     </script>
 

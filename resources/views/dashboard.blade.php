@@ -808,15 +808,15 @@
 
     <body>
 
-    <div id="low-stock-warning" class="d-none">
+    {{-- <div id="low-stock-warning" class="d-none">
     ⚠️ Stock faible: moins de 10 produits dans le stock!
-</div>
+</div> --}}
 
 
 
         <div class="main-content-inner" style="margin-left: 250px;">
             <div class="row">
-                <h1 class="h3">Bonjour Admin</h1>
+                <h1 class="h3">Bonjour {{auth()->user()->role->name}}</h1>
             </div>
 
             <div class="row">

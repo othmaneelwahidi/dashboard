@@ -9,6 +9,7 @@ use App\Models\Stock;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -38,7 +39,14 @@ class DashboardController extends Controller
 
         $actions = Action::with('user')->orderBy('created_at', 'desc')->take(3)->get();
 
-        $lowStockCount = Stock::where('quantity', '<', 10)->count();
+        $lowStockProducts = DB::table('stock')
+            ->select('product.name', DB::raw('SUM(CASE WHEN movement_type = "entry" THEN quantity ELSE -quantity END) as total_stock'))
+            ->join('product', 'stock.product_id', '=', 'product.id')
+            ->groupBy('product.id', 'product.name')
+            ->having('total_stock', '<', 10)
+            ->get();
+
+        $lowStockCount = $lowStockProducts->count();
 
         return view('dashboard', compact(
             'totalUser',
@@ -52,7 +60,9 @@ class DashboardController extends Controller
             'stockMovementCounts',
             'totalStock',
             'actions',
-            'lowStockCount'
+            'lowStockCount',
+            'lowStockProducts',
+            'lowStockCount',
         ));
     }
 
