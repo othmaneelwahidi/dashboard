@@ -22,15 +22,15 @@ class DashboardController extends Controller
         $exitStock = Stock::where('movement_type', 'exit')->count();
         $adjustmentStock = Stock::where('movement_type', 'ajustment')->count();
 
-        $productsPerMonth = Product::selectRaw('MONTH(created_at) as month, count(*) as count')
-            ->groupBy('month')
-            ->orderBy('month')
-            ->pluck('count', 'month');
+        $productsPerMonth = Product::selectRaw('DAY(created_at) as day, count(*) as count')
+            ->groupBy('day')
+            ->orderBy('day')
+            ->pluck('count', 'day');
 
-        $categoriesPerMonth = Category::selectRaw('MONTH(created_at) as month, count(*) as count')
-            ->groupBy('month')
-            ->orderBy('month')
-            ->pluck('count', 'month');
+        $categoriesPerMonth = Category::selectRaw('DAY(created_at) as day, count(*) as count')
+            ->groupBy('day')
+            ->orderBy('day')
+            ->pluck('count', 'day');
 
         $stockMovementCounts = Stock::selectRaw('movement_type, count(*) as count')
             ->groupBy('movement_type')

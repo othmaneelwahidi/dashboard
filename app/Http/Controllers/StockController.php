@@ -78,8 +78,8 @@ class StockController extends Controller
      */
     public function edit(Stock $stock)
     {
-        $products = Product::all();
-        return view('stock.edit', compact('stock', 'products'));
+        $product = Product::findOrFail($stock->product_id); // Get the associated product
+        return view('stock.edit', compact('stock', 'product'));
     }
 
     /**
