@@ -1,5 +1,4 @@
 @extends('layouts.navigation')
-@extends('layouts.navbar')
 @section('content')
 <style>
     .Liste{

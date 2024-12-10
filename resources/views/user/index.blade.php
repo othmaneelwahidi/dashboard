@@ -1,3 +1,13 @@
+<head>
+<!-- Add DataTables CSS -->
+<link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet">
+
+<!-- Add jQuery and DataTables JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+
+
+</head>
 <x-app-layout>
     @if (session('success'))
         <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
@@ -17,12 +27,13 @@
         }
 
         .container {
-       
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             justify-content: center;
             margin: 20px auto;
+            margin-top:6%;
+            margin-left:20%;
         }
 
         .dowload {
@@ -68,77 +79,87 @@
         tr:hover {
             background-color: #f1f1f1;
         }
-        .c{
+
+        .c {
             margin-top:-100%;
-            margin-left:5%;
+            margin-left:2%;
             margin-bottom:5%;
         }
-        .mb-4{
+
+        .mb-4 {
             margin-left:38%;
         }
     </style>
 
-
-        <div class="container">
-            <div class="c">
-                <a href="#" style="color: black;">Dashboard</a> / Liste utilisateur
-            </div>
-            <button class="dowload">
-                <a href="{{ route('export.users') }}">Download Excel</a>
-            </button>
-            <h2 class="text-xl font-bold mt-4">Liste utilisateurs</h2>
-
-            <!-- Role Filter Input -->
-            <div class="mb-4">
-                <label for="roleFilter" class="mr-2"><strong>Role:</strong></label>
-                <input type="text" id="roleFilter" class="border p-2" placeholder="Enter role to filter" oninput="filterByRole()" />
-            </div>
-
-            <!-- User Table -->
-            <div class="table-container">
-                <table class="border border-gray-200">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Role</th>
-                            <th>Created At</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="userTable">
-                        @foreach ($users as $index => $user)
-                            <tr class="user-row">
-                                <td>{{ $index + 1 }}</td>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>{{ $user->role->name ?? 'N/A' }}</td>
-                                <td>{{ $user->created_at->format('Y-m-d') }}</td>
-                                <td>
-                                    <a href="{{ route('user.edit', $user->id) }}" class="text-blue-600">Edit</a>
-                                    <form action="{{ route('user.destroy', $user->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('Are you sure you want to delete this user?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="text-red-600">Supprimer</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+    <div class="container">
+        <div class="c">
+            <a href="#" style="color: black;">Dashboard</a> / Liste utilisateur
         </div>
-  
+        <button class="dowload">
+            <a href="{{ route('export.users') }}">Download Excel</a>
+        </button>
+        <h2 class="text-xl font-bold mt-4">Liste utilisateurs</h2>
+
+        <!-- Role Filter Input -->
+        <div class="mb-4">
+            <label for="roleFilter" class="mr-2"><strong>Role:</strong></label>
+            <input type="text" id="roleFilter" class="border p-2" placeholder="Enter role to filter" oninput="filterByRole()" />
+        </div>
+
+        <!-- User Table -->
+        <div class="table-container">
+            <table id="userTable" class="border border-gray-200">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Created At</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($users as $index => $user)
+                        <tr class="user-row">
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ $user->role->name ?? 'N/A' }}</td>
+                            <td>{{ $user->created_at->format('Y-m-d') }}</td>
+                            <td>
+                                <a href="{{ route('user.edit', $user->id) }}" class="text-blue-600">Edit</a>
+                                <form action="{{ route('user.destroy', $user->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-600">Supprimer</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     <script>
+        $(document).ready(function() {
+            // Initialize DataTable
+            $('#userTable').DataTable({
+                "paging": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+            });
+        });
+
         // JavaScript function to filter users by role
         function filterByRole() {
             const roleFilter = document.getElementById('roleFilter').value.toLowerCase();
             const rows = document.querySelectorAll('.user-row');
 
             rows.forEach(row => {
-                const role = row.cells[3].innerText.trim().toLowerCase(); // Fix: Correct column index for role
+                const role = row.cells[3].innerText.trim().toLowerCase(); // Correct column index for role
                 if (role.includes(roleFilter) || roleFilter === "") {
                     row.style.display = '';
                 } else {

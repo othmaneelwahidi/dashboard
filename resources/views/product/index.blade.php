@@ -6,9 +6,6 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-
-
-
         }
 
         .containerr {
@@ -21,48 +18,48 @@
         .table-container {
             overflow-x: auto;
             white-space: nowrap;
-
         }
 
         /* Adjusting table and cell size */
         table {
             width: 50%;
-            /* Smaller table width */
             margin: 0 auto;
-            /* Center the table */
             border-collapse: collapse;
-            /* Remove gaps between cells */
             font-size: 12px;
-            /* Reduce font size */
         }
 
         th,
         td {
             padding: 4px 8px;
-            /* Smaller padding for compact cells */
             text-align: left;
             border: 1px solid #ccc;
-            /* Add border for clarity */
         }
 
         th {
             background-color: #f2f2f2;
-            /* Light header background */
             font-weight: bold;
         }
 
         tr {
             height: auto;
-            /* Adjust height based on content */
         }
 
         #form {
-
             margin-left: 30%;
         }
+        #table{
+            margin-top:5%;
+           
+        }
     </style>
+
+    <!-- Include jQuery and DataTables.js -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
     <div class="containerr">
-        <div class="container ">
+        <div class="container">
             @if (session('error'))
                 <div class="alert alert-danger">
                     {{ session('error') }}
@@ -75,19 +72,11 @@
                 </div>
             @endif
 
-
             <h2 class="text-xl font-bold mb-4">Liste des Produits</h2>
-            <a href="{{ route('products.export') }}" class="btn btn-success">Export Products</a>
-            <form action="{{ route('products.import') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="form-group">
-                    <label for="file">Import Products (Excel/CSV)</label>
-                    <input type="file" name="file" class="form-control" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Import</button>
-            </form>            
+           
+
             <div class="table-container" id="form">
-                <table class="min-w-full bg-white border border-gray-200">
+                <table class="min-w-full bg-white border border-gray-200" id="productsTable">
                     <thead class="bg-gray-200 text-gray-600">
                         <tr>
                             <th class="py-2 px-4 border-b">#</th>
@@ -119,7 +108,7 @@
                                         <button class="text-blue-600">Détails</button>
                                     </a>
                                     <br>
-                                    @if(auth()->user()->role->name=='Administrateur')
+                                    @if(auth()->user()->role->name == 'Administrateur')
                                         <form action="{{ route('produit.destroy', $produit->id) }}" method="POST"
                                             onsubmit="return confirm('Are you sure you want to delete this product?');">
                                             @csrf
@@ -133,10 +122,35 @@
                                 </td>
                             </tr>
                         @endforeach
-
                     </tbody>
                 </table>
+                <div id="table">
+                <a href="{{ route('products.export') }}" class="btn btn-success">Export Products</a>
+            <form action="{{ route('products.import') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group">
+                    <label for="file">Import Products (Excel/CSV)</label>
+                    <input type="file" name="file" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Import</button>
+            </form></div>
             </div>
         </div>
+        
     </div>
+<br><br><br>
+    <script>
+        $(document).ready(function() {
+            $('#productsTable').DataTable({
+                responsive: true,
+                paging: true,
+                searching: true,
+                ordering: true,
+                lengthMenu: [10, 25, 50, 100],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.11.5/i18n/French.json'
+                }
+            });
+        });
+    </script>
 </x-app-layout>
