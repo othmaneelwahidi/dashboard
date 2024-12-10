@@ -962,16 +962,16 @@
             var lineChart = new Chart(ctxLine, {
                 type: 'line',
                 data: {
-                    labels: @json(range(1, 12)),
+                    labels: @json(range(1, 31)),
                     datasets: [{
-                        label: 'Products per Month',
+                        label: 'Products per day',
                         data: @json($productsPerMonth),
                         borderColor: 'rgba(75, 192, 192, 1)',
                         backgroundColor: 'rgba(75, 192, 192, 0.2)',
                         fill: true,
                         tension: 0.1
                     }, {
-                        label: 'Categories per Month',
+                        label: 'Categories per day',
                         data: @json($categoriesPerMonth),
                         borderColor: 'rgba(153, 102, 255, 1)',
                         backgroundColor: 'rgba(153, 102, 255, 0.2)',
@@ -985,7 +985,11 @@
                         x: {
                             title: {
                                 display: true,
-                                text: 'Month'
+                                text: 'Day'
+                            },
+                            ticks: {
+                                autoSkip: true,
+                                maxTicksLimit: 30
                             }
                         },
                         y: {
@@ -998,7 +1002,6 @@
                 }
             });
 
-            // Donut Chart for Stock Movements
             var ctxDonut = document.getElementById('donutChart').getContext('2d');
             var donutChart = new Chart(ctxDonut, {
                 type: 'doughnut',
@@ -1025,7 +1028,6 @@
                         }
                     }
                 }
-
             });
         </script>
         <script>
