@@ -901,8 +901,9 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Administrateur</th>
+                            <th>Utilisateur</th>
                             <th>Notification</th>
+                            <th>details</th>
                             <th>DATE</th>
                         </tr>
                     </thead>
@@ -914,6 +915,7 @@
                                 <td class="{{ $action->action }}">
                                     {{ ucfirst(str_replace('_', ' ', $action->action)) }}
                                 </td>
+                                <td>{{ $action->details }}</td>
                                 <td class="status-inactive">{{ $action->created_at->format('Y-m-d H:i:s') }}</td>
                             </tr>
                         @endforeach
@@ -934,7 +936,7 @@
             var lineChart = new Chart(ctxLine, {
                 type: 'line',
                 data: {
-                    labels: @json(range(1, 12)), // Months 1 to 12
+                    labels: @json(range(1, 12)),
                     datasets: [{
                         label: 'Products per Month',
                         data: @json($productsPerMonth),

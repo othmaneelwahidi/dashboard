@@ -77,4 +77,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+//create a middleware for the role 
 require __DIR__.'/auth.php';

@@ -13,10 +13,11 @@ class ProductObserver
      */
     public function created(Product $product)
     {
+        $product=Product::all();
         Action::create([
             'user_id' => Auth::id(),
             'action' => 'add_product',
-            'details' => 'Added product: ' . $product->name,
+            'details' => 'Ajouter produit: ' . $product->name,
         ]);
     }
 
@@ -26,7 +27,7 @@ class ProductObserver
         Action::create([
             'user_id' => Auth::id(),
             'action' => 'update_product',
-            'details' => 'Updated product: ' . $product->name,
+            'details' => 'Modifier produit: ' . $product->name,
         ]);
     }
 
@@ -36,7 +37,7 @@ class ProductObserver
         Action::create([
             'user_id' => Auth::id(),
             'action' => 'delete_product',
-            'details' => 'Deleted product: ' . $product->name,
+            'details' => 'Supprimer produit: ' . $product->name,
         ]);
     }
 
