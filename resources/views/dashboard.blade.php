@@ -769,26 +769,6 @@
 }
 .a{
     margin-left:89%;
-}#low-stock-warning {
-    display: none;
-    position: absolute; /* Changed from fixed to absolute */
-    top: 18%; /* Adjust for vertical placement */
-    right: 1%; /* Maintain some space from the right edge */
-    width: 400px; /* Set a fixed width */
-    max-width: 100%; /* Ensure it doesn't exceed the viewport width */
-    background-color: #ffcc00;
-    color: black;
-    padding: 10px;
-    border-radius: 5px;
-    margin-top: -2%; /* Adjust for overlap if needed */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    z-index: 1000; /* Ensure it appears above other elements */
-    word-wrap: break-word; /* Handle long messages gracefully */
-    text-align: center; /* Center-align text */
-}
-
-#low-stock-warning.d-block {
-    display: block;
 }
 .Rapport-personnalisés{
     margin-left:18%;
@@ -799,6 +779,7 @@
 #rapport{
     margin-left:18%;
 }
+
 </style>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
@@ -807,10 +788,6 @@
     </head>
 
     <body>
-
-    <div id="low-stock-warning" class="d-none">
-    ⚠️ Stock faible: moins de 10 produits dans le stock!
-</div>
 
 
 
@@ -1061,39 +1038,6 @@
     });
 </script>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                // Simulating the product count dynamically, replace this with your actual variable
-                const totalStock = {{ $lowStockCount }}; // Replace with the server-side variable if dynamic
-
-                const lowStockWarning = document.getElementById("low-stock-warning");
-
-                // Show the low-stock warning if the count is less than 10
-                if (totalStock < 10) {
-                    lowStockWarning.classList.remove("d-none");
-                    lowStockWarning.classList.add("d-block");
-                }
-            });
-            document.addEventListener("DOMContentLoaded", () => {
-                const closeButton = document.querySelector("#low-stock-warning .btn-close");
-                const lowStockWarning = document.getElementById("low-stock-warning");
-
-                closeButton.addEventListener("click", () => {
-                    if (lowStockWarning) {
-                        lowStockWarning.classList.remove("d-block");
-                        lowStockWarning.classList.add("d-none");
-                    } else {
-                        console.error("Low stock warning element not found!");
-                    }
-                });
-                document.querySelector('.Rapport').addEventListener('click', function() {
-                    this.classList.add('downloaded');
-                    setTimeout(() => this.classList.remove('downloaded'),
-                        2000); // Reset animation after 2 seconds
-                });
-
-            });
-        </script>
         <script>
             const downloadButton = document.getElementById("btn-download");
 
