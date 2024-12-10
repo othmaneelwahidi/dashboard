@@ -808,9 +808,9 @@
 
     <body>
 
-    {{-- <div id="low-stock-warning" class="d-none">
+    <div id="low-stock-warning" class="d-none">
     ⚠️ Stock faible: moins de 10 produits dans le stock!
-</div> --}}
+</div>
 
 
 
