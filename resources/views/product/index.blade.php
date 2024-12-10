@@ -119,7 +119,7 @@
                                         <button class="text-blue-600">Détails</button>
                                     </a>
                                     <br>
-                                    @if(auth()->user()->role->name=='Administateur')
+                                    @if(auth()->user()->role->name=='Administrateur')
                                         <form action="{{ route('produit.destroy', $produit->id) }}" method="POST"
                                             onsubmit="return confirm('Are you sure you want to delete this product?');">
                                             @csrf

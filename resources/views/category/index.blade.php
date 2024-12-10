@@ -119,7 +119,7 @@ button.submit:active {
                         <a href="{{ route('categories.show', $category->id) }}">
                             <button>View</button>
                         </a>
-                        @if(auth()->user()->role->name=='Administateur')
+                        @if(auth()->user()->role->name=='Administrateur')
                         <a href="{{ route('categories.edit', $category->id) }}">
                             <button class="edit">Edit</button>
                         </a>

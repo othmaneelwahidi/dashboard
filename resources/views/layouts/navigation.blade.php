@@ -258,7 +258,7 @@
             </li>
     
             <!-- Utilisateurs -->
-            @if(auth()->user()->role->name=='Administateur')
+            @if(auth()->user()->role->name=='Administrateur')
             <li class="dropdown">
                 <a href="#" onclick="toggleMenu(event)">
                     <i class="fas fa-user"></i> Utilisateurs <i class="fas fa-chevron-down"></i>
