@@ -40,7 +40,7 @@ class CategoryController extends Controller
         // Create the new category
         $category = Category::create($validated);
 
-        return redirect()->route('categories.index')->with('success', 'Category created successfully!');
+        return redirect()->route('categories.index')->with('success', 'Création de catégorie avec succée!');
     }
 
     /**
@@ -76,7 +76,7 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->update($validated);
 
-        return redirect()->route('categories.index')->with('success', 'Category updated successfully!');
+        return redirect()->route('categories.index')->with('success', 'Modification de catégorie avec succés!');
     }
 
     /**
@@ -87,7 +87,7 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->delete();
 
-        return redirect()->route('categories.index')->with('success', 'Category deleted successfully!');
+        return redirect()->route('categories.index')->with('success', 'Suppression de catégorie avec succés!');
     }
 
     /**
@@ -103,7 +103,7 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->products()->syncWithoutDetaching($validated['product_ids']);
 
-        return redirect()->route('categories.show', $id)->with('success', 'Products added to category successfully!');
+        return redirect()->route('categories.show', $id)->with('success', 'Catégorie a été ajoutée au produit avec succès!');
     }
 
     /**
@@ -119,6 +119,6 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->products()->detach($validated['product_ids']);
 
-        return redirect()->route('categories.show', $id)->with('success', 'Products removed from category successfully!');
+        return redirect()->route('categories.show', $id)->with('success', "Produits retirés de la catégorie avec succès!");
     }
 }

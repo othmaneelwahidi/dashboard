@@ -101,7 +101,7 @@ class StockController extends Controller
 
         // Check if the stock record is found
         if (!$stock) {
-            return back()->with('error', 'Stock record not found.');
+            return back()->with('error', 'Enregistrement de stock non trouvé.');
         }
 
         // Update the stock record with the validated data
@@ -110,10 +110,10 @@ class StockController extends Controller
         } catch (\Exception $e) {
             // Log any error during the update process
             Log::error('Error updating stock:', ['error' => $e->getMessage()]);
-            return back()->with('error', 'An error occurred while updating the stock.');
+            return back()->with('error', 'Une erreur est survenue lors de la mise à jour du stock.');
         }
 
-        return redirect()->route('stocks.index')->with('success', 'Stock updated successfully.');
+        return redirect()->route('stocks.index')->with('success', 'Stock mis à jour avec succès.');
     }
 
     /**
@@ -126,7 +126,7 @@ class StockController extends Controller
     {
         $stock->delete();
 
-        return redirect()->route('stocks.index')->with('success', 'Stock deleted successfully.');
+        return redirect()->route('stocks.index')->with('success', 'Stock supprimé avec succès.');
     }
 
     public function export()
@@ -142,6 +142,6 @@ class StockController extends Controller
 
         Excel::import(new StockImport, $request->file('file'));
 
-        return redirect()->route('stocks.index')->with('success', 'Stock data imported successfully!');
+        return redirect()->route('stocks.index')->with('success', 'Données de stock importées avec succès !');
     }
 }

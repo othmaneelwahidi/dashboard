@@ -1021,22 +1021,7 @@
                 }
             });
         </script>
-        <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        // Simulating the product count dynamically, replace this with your actual variable
-        const totalStock = {{ $lowStockCount }}; // Replace with the server-side variable if dynamic
-
-        // Show the low-stock warning using Jolty-UI toast
-        if (totalStock < 10) {
-            JoltyUI.toast({
-                title: "⚠️ Attention",
-                message: "Stock faible: moins de 10 produits dans le stock!",
-                type: "warning", // Choose: success, error, warning, info
-                duration: 5000, // Time in milliseconds
-            });
-        }
-    });
-</script>
+        
 
         <script>
             const downloadButton = document.getElementById("btn-download");

@@ -62,7 +62,6 @@ class DashboardController extends Controller
             'actions',
             'lowStockCount',
             'lowStockProducts',
-            'lowStockCount',
         ));
     }
 

@@ -33,6 +33,9 @@
 </style>
 <div class="container">
     <h1>Stocks</h1>
+    @if (session('success'))
+        <p style="color: green;">{{ session('success') }}</p>
+    @endif
     <form action="{{ route('stock.import') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">

@@ -32,7 +32,7 @@ class ProduitController extends Controller
         $produit = Product::findOrFail($id);
         $produit->delete();
 
-        return redirect()->route('produits.index')->with('success', 'Produit deleted successfully');
+        return redirect()->route('produits.index')->with('success', 'Produit supprimé avec succès!');
     }
 
     public function store(Request $request)
@@ -71,7 +71,7 @@ class ProduitController extends Controller
         ]);
 
         // Redirect with success message
-        return redirect()->route('produits.index')->with('success', 'Produit créé avec succès');
+        return redirect()->route('produits.index')->with('success', 'Produit créée avec succès');
     }
 
     public function edit($id)
@@ -140,7 +140,7 @@ class ProduitController extends Controller
         // Return response
         return redirect()
             ->route('produits.index')
-            ->with('success', 'Product and attributes updated successfully!');
+            ->with('success', 'Produit et attributs mis à jour avec succès!');
     }
 
 
@@ -168,7 +168,7 @@ class ProduitController extends Controller
             // Redirect back with an error message
             return redirect()
                 ->route('produits.index')
-                ->with('error', 'This product already has an attribute.');
+                ->with('error', 'Ce produit a déjà un attribut.');
         }
 
         // Save the attribute to the database
@@ -184,7 +184,7 @@ class ProduitController extends Controller
         // Redirect back with success message
         return redirect()
             ->route('produits.index')
-            ->with('success', 'Attribute added successfully!');
+            ->with('success', 'Attribut ajouté avec succès !');
     }
 
     public function show($id)
@@ -208,6 +208,6 @@ class ProduitController extends Controller
         // Import the file
         Excel::import(new ProductImport, $request->file('file'));
 
-        return redirect()->route('produits.index')->with('success', 'Products imported successfully.');
+        return redirect()->route('produits.index')->with('success', 'Produits importés avec succès.');
     }
 }
