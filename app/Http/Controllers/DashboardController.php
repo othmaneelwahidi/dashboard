@@ -17,7 +17,7 @@ class DashboardController extends Controller
         $totalUser = User::count();
         $totalProduct = Product::count();
         $totalCategory = Category::count();
-        $totalStock = Category::count();
+        $totalStock = Stock::count();
         $entryStock = Stock::where('movement_type', 'entry')->count();
         $exitStock = Stock::where('movement_type', 'exit')->count();
         $adjustmentStock = Stock::where('movement_type', 'ajustment')->count();
@@ -38,6 +38,8 @@ class DashboardController extends Controller
 
         $actions = Action::with('user')->orderBy('created_at', 'desc')->take(3)->get();
 
+        $lowStockCount = Stock::where('quantity', '<', 10)->count();
+
         return view('dashboard', compact(
             'totalUser',
             'totalProduct',
@@ -49,7 +51,8 @@ class DashboardController extends Controller
             'categoriesPerMonth',
             'stockMovementCounts',
             'totalStock',
-            'actions'
+            'actions',
+            'lowStockCount'
         ));
     }
 
