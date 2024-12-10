@@ -769,26 +769,36 @@
 }
 .a{
     margin-left:89%;
+}#low-stock-warning {
+    display: none;
+    position: absolute; /* Changed from fixed to absolute */
+    top: 18%; /* Adjust for vertical placement */
+    right: 1%; /* Maintain some space from the right edge */
+    width: 400px; /* Set a fixed width */
+    max-width: 100%; /* Ensure it doesn't exceed the viewport width */
+    background-color: #ffcc00;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: -2%; /* Adjust for overlap if needed */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000; /* Ensure it appears above other elements */
+    word-wrap: break-word; /* Handle long messages gracefully */
+    text-align: center; /* Center-align text */
 }
 
-    #low-stock-warning {
-        display: none;
-        position: fixed;
-        bottom: 10%;
-        right: 10%;
-        background-color: #ffcc00;
-        color: black;
-        padding: 15px;
-        border-radius: 5px;
-        z-index: 9999;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    }
+#low-stock-warning.d-block {
+    display: block;
+}
+.Rapport-personnalisés{
+    margin-left:18%;
+    margin-top:5%;
+    margin-bottom:5%;
+}
 
-    #low-stock-warning.d-block {
-        display: block;
-    }
-
-
+#rapport{
+    margin-left:18%;
+}
 </style>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
@@ -887,10 +897,12 @@
             </div>
             <div class="btn-bt">
                 <div class="btn-bt">
+                    <div id="rapport">
                     <h2 class="Rapport">Rapport Standard</h2>
-                    <h4 class="Telecharger">Télécharger le fichier :</h4>
+                    <h4 class="Telecharger">Télécharger le fichier :</h4></div>
                 </div>
             </div>
+            <div>
             <div id="btn-download">
 
                 <div id="wrap">
@@ -903,7 +915,9 @@
 
 
             </div>
-        </div>
+        </div><div class="Rapport-personnalisés">
+
+      
         @if (auth()->user()->role->name == 'Administrateur' || auth()->user()->role->name == 'Utilisateur Standard')
             <div class="btn-bt">
                 <h2 class="Rapport">Rapport Personnalisés:</h2>
@@ -913,13 +927,13 @@
                     <a href="{{ route('reports.index') }}">
 
 
-                        <span>Click here</span>
+                        <span >Click here</span>
                     </a>
 
 
                 </div>
             </div>
-        @endif
+        @endif  </div>
 
         <div class="content">
             <div class="table">
@@ -948,7 +962,7 @@
                     </tbody>
                 </table>
                 @if (auth()->user()->role->name == 'Administrateur')
-                    <a href="{{ route('actions') }}">See More</a>
+                    <a href="{{ route('actions') }}" class="a">See More</a>
                 @endif
             </div>
             <div></div>
