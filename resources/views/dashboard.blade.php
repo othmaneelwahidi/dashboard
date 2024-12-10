@@ -770,18 +770,38 @@
 .a{
     margin-left:89%;
 }
+
+    #low-stock-warning {
+        display: none;
+        position: fixed;
+        bottom: 10%;
+        right: 10%;
+        background-color: #ffcc00;
+        color: black;
+        padding: 15px;
+        border-radius: 5px;
+        z-index: 9999;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    #low-stock-warning.d-block {
+        display: block;
+    }
+
+
 </style>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-
+        <link rel="stylesheet" href="{{ asset('node_modules/jolty-ui/dist/jolty-ui.css') }}">
+        <script src="{{ asset('node_modules/jolty-ui/dist/jolty-ui.js') }}" defer></script>
     </head>
 
     <body>
 
-        <div id="low-stock-warning" class="low-stock-notification d-block">
-            ⚠️ Stock faible: moins de 10 produits dans le stock!
-            <button type="button" class="btn-close" aria-label="Close" style="color:white;">X</button>
-        </div>
+    <div id="low-stock-warning" class="d-none">
+    ⚠️ Stock faible: moins de 10 produits dans le stock!
+</div>
+
 
 
         <div class="main-content-inner" style="margin-left: 250px;">
@@ -1009,6 +1029,23 @@
             });
         </script>
         <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Simulating the product count dynamically, replace this with your actual variable
+        const totalStock = {{ $lowStockCount }}; // Replace with the server-side variable if dynamic
+
+        // Show the low-stock warning using Jolty-UI toast
+        if (totalStock < 10) {
+            JoltyUI.toast({
+                title: "⚠️ Attention",
+                message: "Stock faible: moins de 10 produits dans le stock!",
+                type: "warning", // Choose: success, error, warning, info
+                duration: 5000, // Time in milliseconds
+            });
+        }
+    });
+</script>
+
+        <script>
             document.addEventListener("DOMContentLoaded", () => {
                 // Simulating the product count dynamically, replace this with your actual variable
                 const totalStock = {{ $lowStockCount }}; // Replace with the server-side variable if dynamic
@@ -1048,6 +1085,24 @@
                 downloadButton.classList.toggle("downloaded");
             });
         </script>
+        <script>
+  import {
+    success,
+    info,
+    error,
+    warning
+  } from "@helpers/noty";
+  document.querySelector("#show-success").addEventListener("click", (e) => {
+    success("This is a success message!");
+  });
+
+  document.querySelector("#show-error").addEventListener("click", (e) => {
+    error("This is an error message!");
+  });
+  document.querySelector("#show-warning").addEventListener("click", (e) => {
+    warning("This is a warning message!");
+  });
+</script>
     </body>
 
     </html>
