@@ -101,6 +101,51 @@
         #bell:hover {
             color: black;
         }
+        .dropdown-container {
+    display: none;
+    position: absolute;
+    bottom: -103px;
+    right: 0;
+    top: 12px background-color: #808080;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 250px;
+    z-index: 1000;
+    padding: 15px;
+    transition: all 0.3s ease;
+}
+
+.dropdown-container ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    color: #000; /* Black text for contrast */
+}
+
+.dropdown-container ul li {
+    padding: 12px 20px;
+    border-bottom: 1px solid #444; /* Darker separator for a sleek look */
+    font-size: 16px;
+    font-weight: 500;
+    color: #000; /* Black text */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Animation effects */
+}
+
+.dropdown-container ul li:last-child {
+    border-bottom: none;
+}
+
+.dropdown-container ul li:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Subtle hover effect */
+    color: #000; /* Black text on hover */
+    transform: translateX(5px); /* Slightly shift the item for interaction */
+}
+
+.dropdown-container ul li:active {
+    background-color: rgba(0, 0, 0, 0.2); /* Darker background on click */
+    transform: translateX(3px); /* Subtle click effect */
+}
+
     </style>
 </head>
 
@@ -116,16 +161,26 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <div class="gap">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link position-relative">
-                                <i class="fa fa-bell" id="bell"></i>
-                                <span class="badge-sonar" id="sonar" 
-                                      style="{{ $lowStockCount > 0 ? 'display: inline-block;' : 'display: none;' }}">
-                                </span>
-                            </a>                            
-                        </li>
-                    </div>
+                <div class="gap">
+    <li class="nav-item">
+        <a href="#" class="nav-link position-relative" id="bell-notification">
+            <i class="fa fa-bell" id="bell"></i>
+            <span class="badge-sonar" id="sonar" 
+                  style="{{ $lowStockCount > 0 ? 'display: inline-block;' : 'display: none;' }}">
+            </span>
+        </a>                            
+        <!-- Dropdown container -->
+        <div id="notification-dropdown" class="dropdown-container">
+            <ul>
+                @if($lowStockCount > 0)
+                    <li>⚠️ Low stock: {{ $lowStockCount }} items left.</li>
+                @else
+                    <li>No new notifications.</li>
+                @endif
+            </ul>
+        </div>
+    </li>
+</div>
 
 
                     <li class="nav-item">
@@ -190,7 +245,36 @@
                 setTimeout(() => this.classList.remove('downloaded'),
                 2000); // Reset animation after 2 seconds
             });
+            
         });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    const bellNotification = document.getElementById("bell-notification");
+    const notificationDropdown = document.getElementById("notification-dropdown");
+
+    // Ensure the dropdown is hidden by default
+    notificationDropdown.style.display = "none";
+
+    // Add click event listener to the bell
+    bellNotification.addEventListener("click", function(e) {
+        e.preventDefault();
+        // Toggle dropdown visibility
+        if (notificationDropdown.style.display === "none" || notificationDropdown.style.display === "") {
+            notificationDropdown.style.display = "block"; // Show dropdown
+        } else {
+            notificationDropdown.style.display = "none"; // Hide dropdown
+        }
+    });
+
+    // Optional: Close dropdown when clicking outside
+    document.addEventListener("click", function(event) {
+        if (!bellNotification.contains(event.target) && !notificationDropdown.contains(event.target)) {
+            notificationDropdown.style.display = "none"; // Close dropdown if clicking outside
+        }
+    });
+});
+
     </script>
 
 </body>
