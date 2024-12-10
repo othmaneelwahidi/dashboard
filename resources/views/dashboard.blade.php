@@ -779,7 +779,31 @@
 #rapport{
     margin-left:18%;
 }
-
+.btn-slide span.circle, .btn-slide2 span.circle2 {
+    display: block;
+    background-color: #016306;
+    color: #fff;
+    position: absolute;
+    float: left;
+    margin: 3px;
+    margin-top: 3px;
+    line-height: 42px;
+    height: 40px;
+    width: 40px;
+    top: 0;
+    left: 0;
+    transition: .5s;
+    border-radius: 50%;
+}
+.fa, .fa-brands, .fa-duotone, .fa-light, .fa-regular, .fa-solid, .fa-thin, .fab, .fad, .fal, .far, .fas, .fat {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: var(--fa-display, inline-block);
+    font-style: normal;
+    font-variant: normal;
+    line-height: 2;
+    text-rendering: auto;
+}
 </style>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
