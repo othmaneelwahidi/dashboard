@@ -20,13 +20,14 @@
 
 
 
-/* Optional: Style buttons to match the smaller table */
 .btn-sm {
-    padding: 0.25rem 0.5rem; /* Adjust button padding */
-    font-size: 0.75rem; /* Reduce button font size */
-}
+        padding: 0.25rem 0.5rem; /* Adjust button padding */
+        font-size: 0.75rem; /* Reduce button font size */
+        width: 90px; /* Set a fixed width for buttons */
+        margin-top:5px;   }
+
 .container{
-    margin-left:30%;
+    margin-left:24%;
     margin-top:5%;
 }
 </style>

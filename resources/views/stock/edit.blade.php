@@ -1,6 +1,12 @@
-@extends('layouts.navbar')
+@extends('layouts.navigation')
 
 @section('content')
+<style>
+    .container{
+        margin-top:5%;
+        margin-left:20%;
+    }
+</style>
 <div class="container">
     <h1>Edit Stock</h1>
     <form action="{{ route('stocks.update', $stock) }}" method="POST">

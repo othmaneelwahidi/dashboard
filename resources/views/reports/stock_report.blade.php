@@ -44,7 +44,7 @@
         <h2>Low Stock Products</h2>
         <ul>
             @foreach ($lowStockProducts as $product)
-                <li>{{ $product->name }} (Current stock: {{ $product->stock->quantity }})</li>
+                <li>{{ $product->name }} (Current stock: {{ $product->stock ? $product->stock->quantity : 'N/A' }})</li>
             @endforeach
         </ul>
 

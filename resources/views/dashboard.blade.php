@@ -732,7 +732,12 @@ canvas {
     border-width: 3px;
     box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.6);
 }
-
+.fa-download{
+    margin-top:5%;
+}
+.a{
+    margin-left:89%;
+}
 </style>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
@@ -886,7 +891,7 @@ canvas {
                         </tbody>
                     </table>
                     @if (auth()->user()->role->name == 'Administrateur')
-                        <a href="{{ route('actions') }}">See More</a>
+                        <a href="{{ route('actions') }}" class="a">See More</a>
                     @endif
                 </div>
                 <div></div>
