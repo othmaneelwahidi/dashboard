@@ -16,7 +16,7 @@ class StockObserver
         Action::create([
             'user_id' => Auth::id(),
             'action' => 'stock_movement',
-            'details' => $stock->movement_type . ' of ' . $stock->quantity . ' units for product: ' . $stock->product->name,
+            'details' => $stock->movement_type . ' de ' . $stock->quantity . ' unitée(s) de produit: ' . $stock->product->name,
         ]);
     }
 

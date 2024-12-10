@@ -779,7 +779,7 @@
     <body>
 
         <div id="low-stock-warning" class="low-stock-notification d-block">
-            ⚠️ Low stock: less than 10 products available!
+            ⚠️ Stock faible: moins de 10 produits dans le stock!
             <button type="button" class="btn-close" aria-label="Close" style="color:white;">X</button>
         </div>
 
@@ -1011,12 +1011,12 @@
         <script>
             document.addEventListener("DOMContentLoaded", () => {
                 // Simulating the product count dynamically, replace this with your actual variable
-                const totalProduits = {{ $totalProduct }}; // Replace with the server-side variable if dynamic
+                const totalStock = {{ $lowStockCount }}; // Replace with the server-side variable if dynamic
 
                 const lowStockWarning = document.getElementById("low-stock-warning");
 
                 // Show the low-stock warning if the count is less than 10
-                if (totalProduits < 10) {
+                if (totalStock < 10) {
                     lowStockWarning.classList.remove("d-none");
                     lowStockWarning.classList.add("d-block");
                 }

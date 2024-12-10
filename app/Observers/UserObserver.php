@@ -16,7 +16,7 @@ class UserObserver
         Action::create([
             'user_id' => Auth::id(),
             'action' => 'add_user',
-            'details' => 'Added user: ' . $user->name . ' (Email: ' . $user->email . ')',
+            'details' => 'ajouter utilisateur: ' . $user->name . ' (Email: ' . $user->email . ')',
         ]);
     }
 
@@ -25,7 +25,7 @@ class UserObserver
         Action::create([
             'user_id' => Auth::id(),
             'action' => 'update_user',
-            'details' => 'Updated user: ' . $user->name . ' (Email: ' . $user->email . ')',
+            'details' => 'Modifier utilisateur: ' . $user->name . ' (Email: ' . $user->email . ')',
         ]);
     }
 
@@ -34,7 +34,7 @@ class UserObserver
         Action::create([
             'user_id' => Auth::id(),
             'action' => 'delete_user',
-            'details' => 'Deleted user: ' . $user->name . ' (Email: ' . $user->email . ')',
+            'details' => 'Supprimer utilisateur: ' . $user->name . ' (Email: ' . $user->email . ')',
         ]);
     }
 
